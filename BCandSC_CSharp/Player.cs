@@ -1,5 +1,7 @@
 ﻿namespace BCandSC_CSharp
 {
+    //here
+
     public class Player
     {
         public int Id { get; set; } = -1;
@@ -16,5 +18,5 @@
         }
 
     }
-    //here
+    
 }
