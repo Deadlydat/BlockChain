@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Site</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="reset.css">
+</head>
+<body>
+    <div class="field">
+        <div class="field-headline">
+            <label class="field-headline-coins">220.000.000</label>
+            <label class="field-headline-text">GCoins</label>
+        </div>
+        <div class="field-formations">
+            <div class="field-formation" onclick="showPlayerField('f352')"><label>3-5-2</label></div>
+            <div class="field-formation" onclick="showPlayerField('f343')"><label>3-4-3</label></div>
+            <div class="field-formation" onclick="showPlayerField('f451')"><label>4-5-1</label></div>
+            <div class="field-formation" onclick="showPlayerField('f433')"><label>4-3-3</label></div>
+            <div class="field-formation" onclick="showPlayerField('f442')"><label>4-4-2</label></div>
+            <div class="field-formation" onclick="showPlayerField('f532')"><label>5-3-2</label></div>
+        </div>
+        <div class="field-players">
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>     
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>
+            <div class="field-player" onclick="showCarousel(this)">
+                <div class="field-player-picture">
+                    <img src="img/circle.svg" alt="">
+                </div>
+                <div class="field-player-name">
+                    <label>Name</label>
+                </div>
+            </div>                      
+        </div> 
+    </div>
+
+    <div class="player-carousel">
+        <div class="player-card" id="player1" onclick="addPlayer(this)">
+            <div class="player-card-main">
+                <div class="player-name">
+                    <label class="first-name">Serge</label>
+                    <label class="last-name">Gnabry</label>
+                </div>
+                <div class="player-position">
+                    <label class="jersey-number sub-text">7</label>
+                    <label class="position sub-text">MF</label>
+                </div>
+                <div class="player-picture">
+                    <img src="img/gnabry.jpg" alt="">
+                </div>
+            </div>
+            <div class="player-card-stats">
+                <div class="stat-box">
+                    <label class="stat-value">146</label>
+                    <label class="stat-name sub-text">Punkte</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">15</label>
+                    <label class="stat-name sub-text">Einsätze</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">10</label>
+                    <label class="stat-name sub-text">Fouls</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">0</label>
+                    <label class="stat-name sub-text">Karten</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">8</label>
+                    <label class="stat-name sub-text">Tore</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">3</label>
+                    <label class="stat-name sub-text">Assits</label>
+                </div>
+            </div>
+            <div class="player-card-points">
+                <label class="player-points">2.197</label>
+                <label class="points sub-text">Punkte</label>
+            </div>
+            <div class="player-card-value">
+                <label class="player-value">€35.745.491</label>
+                <label class="marketvalue sub-text">Marktwert</label>
+            </div>
+        </div>
+
+        <div class="player-card" id="player2" onclick="addPlayer(this)">
+            <div class="player-card-main">
+                <div class="player-name">
+                    <label class="first-name">Serge</label>
+                    <label class="last-name">Gnabry</label>
+                </div>
+                <div class="player-position">
+                    <label class="jersey-number sub-text">7</label>
+                    <label class="position sub-text">MF</label>
+                </div>
+                <div class="player-picture">
+                    <img src="img/gnabry.jpg" alt="">
+                </div>
+            </div>
+            <div class="player-card-stats">
+                <div class="stat-box">
+                    <label class="stat-value">146</label>
+                    <label class="stat-name sub-text">Punkte</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">15</label>
+                    <label class="stat-name sub-text">Einsätze</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">10</label>
+                    <label class="stat-name sub-text">Fouls</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">0</label>
+                    <label class="stat-name sub-text">Karten</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">8</label>
+                    <label class="stat-name sub-text">Tore</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">3</label>
+                    <label class="stat-name sub-text">Assits</label>
+                </div>
+            </div>
+            <div class="player-card-points">
+                <label class="player-points">2.197</label>
+                <label class="points sub-text">Punkte</label>
+            </div>
+            <div class="player-card-value">
+                <label class="player-value">€35.745.491</label>
+                <label class="marketvalue sub-text">Marktwert</label>
+            </div>
+        </div>
+
+        <div class="player-card" id="player3" onclick="addPlayer(this)">
+            <div class="player-card-main">
+                <div class="player-name">
+                    <label class="first-name">Serge</label>
+                    <label class="last-name">Gnabry</label>
+                </div>
+                <div class="player-position">
+                    <label class="jersey-number sub-text">7</label>
+                    <label class="position sub-text">MF</label>
+                </div>
+                <div class="player-picture">
+                    <img src="img/gnabry.jpg" alt="">
+                </div>
+            </div>
+            <div class="player-card-stats">
+                <div class="stat-box">
+                    <label class="stat-value">146</label>
+                    <label class="stat-name sub-text">Punkte</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">15</label>
+                    <label class="stat-name sub-text">Einsätze</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">10</label>
+                    <label class="stat-name sub-text">Fouls</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">0</label>
+                    <label class="stat-name sub-text">Karten</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">8</label>
+                    <label class="stat-name sub-text">Tore</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">3</label>
+                    <label class="stat-name sub-text">Assits</label>
+                </div>
+            </div>
+            <div class="player-card-points">
+                <label class="player-points">2.197</label>
+                <label class="points sub-text">Punkte</label>
+            </div>
+            <div class="player-card-value">
+                <label class="player-value">€35.745.491</label>
+                <label class="marketvalue sub-text">Marktwert</label>
+            </div>
+        </div>
+
+        <div class="player-card" id="player4" onclick="addPlayer(this)">
+            <div class="player-card-main">
+                <div class="player-name">
+                    <label class="first-name">Serge</label>
+                    <label class="last-name">Gnabry</label>
+                </div>
+                <div class="player-position">
+                    <label class="jersey-number sub-text">7</label>
+                    <label class="position sub-text">MF</label>
+                </div>
+                <div class="player-picture">
+                    <img src="img/gnabry.jpg" alt="">
+                </div>
+            </div>
+            <div class="player-card-stats">
+                <div class="stat-box">
+                    <label class="stat-value">146</label>
+                    <label class="stat-name sub-text">Punkte</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">15</label>
+                    <label class="stat-name sub-text">Einsätze</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">10</label>
+                    <label class="stat-name sub-text">Fouls</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">0</label>
+                    <label class="stat-name sub-text">Karten</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">8</label>
+                    <label class="stat-name sub-text">Tore</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">3</label>
+                    <label class="stat-name sub-text">Assits</label>
+                </div>
+            </div>
+            <div class="player-card-points">
+                <label class="player-points">2.197</label>
+                <label class="points sub-text">Punkte</label>
+            </div>
+            <div class="player-card-value">
+                <label class="player-value">€35.745.491</label>
+                <label class="marketvalue sub-text">Marktwert</label>
+            </div>
+        </div>
+
+        <div class="player-card" id="player5" onclick="addPlayer(this)">
+            <div class="player-card-main">
+                <div class="player-name">
+                    <label class="first-name">Serge</label>
+                    <label class="last-name">Gnabry</label>
+                </div>
+                <div class="player-position">
+                    <label class="jersey-number sub-text">7</label>
+                    <label class="position sub-text">MF</label>
+                </div>
+                <div class="player-picture">
+                    <img src="img/gnabry.jpg" alt="">
+                </div>
+            </div>
+            <div class="player-card-stats">
+                <div class="stat-box">
+                    <label class="stat-value">146</label>
+                    <label class="stat-name sub-text">Punkte</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">15</label>
+                    <label class="stat-name sub-text">Einsätze</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">10</label>
+                    <label class="stat-name sub-text">Fouls</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">0</label>
+                    <label class="stat-name sub-text">Karten</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">8</label>
+                    <label class="stat-name sub-text">Tore</label>
+                </div>
+                <div class="stat-box">
+                    <label class="stat-value">3</label>
+                    <label class="stat-name sub-text">Assits</label>
+                </div>
+            </div>
+            <div class="player-card-points">
+                <label class="player-points">2.197</label>
+                <label class="points sub-text">Punkte</label>
+            </div>
+            <div class="player-card-value">
+                <label class="player-value">€35.745.491</label>
+                <label class="marketvalue sub-text">Marktwert</label>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>

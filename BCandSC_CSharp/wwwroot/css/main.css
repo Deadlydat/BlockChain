@@ -1,0 +1,261 @@
+:root{
+    --test: 1;
+}
+
+body{
+    display: grid;
+    justify-content: center;
+}
+
+label{
+    text-align: center;
+    font-weight: bold;
+}
+
+.player-carousel{
+    justify-self: center;
+    display: flex;
+    gap: 10px;
+    top: 450px;
+}
+
+.field-player-button {
+    background: url(../img/circle.svg) center center no-repeat;
+    height: 50px;
+    border: none;
+}
+
+.player-card {
+    position: relative;
+    display: grid;
+    border: 1px solid black;
+    grid-template-rows: 6fr 1fr 1fr 1fr;
+    height: 275px;
+    width: 155px;
+}
+
+.player-card-main{
+    background: url(img/sky.jpg) center center no-repeat;
+    display: grid;
+    color: white;
+    gap: 10px;
+}
+
+.player-name, .player-picture{
+    display: grid;
+}
+
+.first-name {
+    align-self: end;
+    color: black;
+}
+
+.card-button{
+    position: relative;
+    z-index: 5;
+}
+
+.card-button div{
+    position: relative;
+    z-index: -1;
+}
+
+.player-position{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.player-picture > img{
+    width: 50%;
+    justify-self: center;
+    align-self: end;
+}
+
+.player-card-stats{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: darkgray;
+    color: white;
+}
+
+.stat-box{
+    display: grid;
+    justify-content: center;
+}
+
+.player-card-points{
+    display: grid;
+    justify-content: center;
+    color: gray;
+}
+
+.player-card-value{
+    background-color: lightgray;
+    display: grid;
+    justify-content: center;
+    color: gray;
+}
+
+.sub-text{
+    font-size: 9px;
+}
+
+
+.field{
+    margin-top: 20px;
+    position: relative;
+    height: 400px;
+    width: 290px;
+    background: url(../img/field.jpg) center center no-repeat;
+    background-size: cover;
+    border: 1px solid black;
+}
+
+.field-headline{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    margin: 10px;
+}
+
+.field-players{
+    padding: 20px 0;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.field-player-picture{
+    display: grid;
+}
+
+.field-player-picture{
+    background: url(img/circle.svg) center center no-repeat;
+}
+
+.field-formations{
+    margin-top: 70px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.field-formation{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
+.show{
+    display: grid;
+}
+
+.showFlex{
+    display: flex;
+}
+
+.hide{
+    display: none;
+}
+
+.red{
+    color: red;
+}
+
+/* FORMATIONS */
+
+.field-player:last-child{
+    grid-area: g1;
+}
+
+.f352{
+    grid-template-areas: 
+    "x1 s1 x2 s2 x3"
+    "m1 m2 m3 m4 m5"
+    "x4 d1 d2 d3 x5"
+    "x6 x7 g1 x8 x9";
+}
+
+.f343{
+    grid-template-areas: 
+    "x1 s1 s2 s3 x2"
+    "m1 m2 x4 m3 m4"
+    "x3 d1 d2 d3 x5"
+    "x6 x7 g1 x8 x9";
+}
+
+.f451{
+    grid-template-areas: 
+    "x1 x2 s1 x3 x4"
+    "m1 m2 m3 m4 m5"
+    "d1 d2 x5 d3 d4"
+    "x6 x7 g1 x8 x9";
+}
+
+.f433{
+    grid-template-areas: 
+    "x1 s1 s2 s3 x2"
+    "x3 m1 m2 m3 x4"
+    "d1 d2 x5 d3 d4"
+    "x6 x7 g1 x8 x9";
+}
+
+.f442{
+    grid-template-areas: 
+    "x1 s1 x2 s2 x3"
+    "m1 m2 x4 m3 m4"
+    "d1 d2 x5 d3 d4"
+    "x6 x7 g1 x8 x9";
+}
+
+.f532{
+    grid-template-areas: 
+    "x1 s1 x2 s2 x3"
+    "x4 m1 m2 m3 x5"
+    "d1 d2 d3 d4 d5"
+    "x6 x7 g1 x8 x9";
+}
+
+.f352 > .field-player:nth-child(1), .f343 > .field-player:nth-child(1), .f451 > .field-player:nth-child(1), .f433 > .field-player:nth-child(1), .f442 > .field-player:nth-child(1), .f532 > .field-player:nth-child(1){
+    grid-area: s1;
+}
+.f352 > .field-player:nth-child(2), .f343 > .field-player:nth-child(2), .f433 > .field-player:nth-child(2), .f442 > .field-player:nth-child(2), .f532 > .field-player:nth-child(2){
+    grid-area: s2;
+}
+.f343 > .field-player:nth-child(3), .f433 > .field-player:nth-child(3){
+    grid-area: s3;
+}
+.f352 > .field-player:nth-child(3), .f343 > .field-player:nth-child(4), .f451 > .field-player:nth-child(2), .f433 > .field-player:nth-child(4), .f442 > .field-player:nth-child(3), .f532 > .field-player:nth-child(3){
+    grid-area: m1;
+}
+.f352 > .field-player:nth-child(4), .f343 > .field-player:nth-child(5), .f451 > .field-player:nth-child(3), .f433 > .field-player:nth-child(5), .f442 > .field-player:nth-child(4), .f532 > .field-player:nth-child(4){
+    grid-area: m2;
+}
+.f352 > .field-player:nth-child(5), .f343 > .field-player:nth-child(6), .f451 > .field-player:nth-child(4), .f433 > .field-player:nth-child(6), .f442 > .field-player:nth-child(5), .f532 > .field-player:nth-child(5){
+    grid-area: m3;
+}
+.f352 > .field-player:nth-child(6), .f343 > .field-player:nth-child(7), .f451 > .field-player:nth-child(5), .f442 > .field-player:nth-child(6){
+    grid-area: m4;
+}
+.f352 > .field-player:nth-child(7), .f451 > .field-player:nth-child(6){
+    grid-area: m5;
+}
+.f352 > .field-player:nth-child(8), .f343 > .field-player:nth-child(8), .f451 > .field-player:nth-child(7), .f433 > .field-player:nth-child(7), .f442 > .field-player:nth-child(7), .f532 > .field-player:nth-child(6){
+    grid-area: d1;
+}
+.f352 > .field-player:nth-child(9), .f343 > .field-player:nth-child(9), .f451 > .field-player:nth-child(8), .f433 > .field-player:nth-child(8), .f442 > .field-player:nth-child(8), .f532 > .field-player:nth-child(7){
+    grid-area: d2;
+}
+.f352 > .field-player:nth-child(10), .f343 > .field-player:nth-child(10), .f451 > .field-player:nth-child(9), .f433 > .field-player:nth-child(9), .f442 > .field-player:nth-child(9), .f532 > .field-player:nth-child(8){
+    grid-area: d3;
+}
+.f451 > .field-player:nth-child(10), .f433 > .field-player:nth-child(10), .f442 > .field-player:nth-child(10), .f532 > .field-player:nth-child(9){
+    grid-area: d4;
+}
+.f532 > .field-player:nth-child(10){
+    grid-area: d5;
+}
