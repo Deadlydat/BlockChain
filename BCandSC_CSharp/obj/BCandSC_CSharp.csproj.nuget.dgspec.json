@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nemme\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj": {}
+    "C:\\Users\\Workstation\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nemme\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj": {
+    "C:\\Users\\Workstation\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nemme\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj",
+        "projectUniqueName": "C:\\Users\\Workstation\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj",
         "projectName": "BCandSC_CSharp",
-        "projectPath": "C:\\Users\\nemme\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj",
-        "packagesPath": "C:\\Users\\nemme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nemme\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\obj\\",
+        "projectPath": "C:\\Users\\Workstation\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp.csproj",
+        "packagesPath": "C:\\Users\\Workstation\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Workstation\\Documents\\GitHub\\BCandSC_CSharp\\BCandSC_CSharp\\BCandSC_CSharp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\nemme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Workstation\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -69,7 +69,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
