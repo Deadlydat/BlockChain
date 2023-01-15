@@ -40,6 +40,30 @@ namespace BCandSC_CSharp.Pages
                 StrikerCount = 2;
                 MidfielderCount = 5;
                 DefenderCount = 3;
+
+
+
+
+
+
+
+                //nur für test
+                Database db = new();
+                Team team1 = new(db.GetPlayers().Where(p => p.Position == Player.PlayerPosition.Defense).ToList());
+                Team team2 = new(db.GetPlayers().Where(p => p.Position == Player.PlayerPosition.Midfield).ToList());
+
+                User user1 = new(team1);
+                User user2 = new(team2);
+
+
+                Gamelogic gamelogic=new Gamelogic(user1, user2,1);
+
+                gamelogic.GetResultsForMatch();
+
+
+
+
+
             }
             FormationString = "f" + DefenderCount.ToString() + MidfielderCount.ToString() + StrikerCount.ToString();
         }

@@ -24,7 +24,7 @@ namespace BCandSC_CSharp
             command.Connection = conn;
             SqlDataReader reader = command.ExecuteReader();
 
-            if(reader.Read() == true)
+            if (reader.Read() == true)
             {
                 player.Id = reader.GetInt32("player_id");
                 player.Name = reader.GetString("name");
@@ -44,7 +44,7 @@ namespace BCandSC_CSharp
             command.Connection = conn;
             SqlDataReader reader = command.ExecuteReader();
 
-            while(reader.Read() == true)
+            while (reader.Read() == true)
             {
                 Player player = new Player();
                 player.Id = reader.GetInt32("player_id");
@@ -57,6 +57,42 @@ namespace BCandSC_CSharp
 
             return players;
         }
+
+
+
+        public Dictionary<int, int> GetResultsFormApi(int matchDay)
+        {
+            Dictionary<int, int> MatchDayResults = new Dictionary<int, int>();
+            SqlCommand command = new SqlCommand("SELECT * FROM PlayerPoints WHERE matchday =@matchDay");
+
+            SqlParameter param = new SqlParameter
+            {
+                ParameterName = "@matchDay",
+                Value = matchDay,
+                SqlDbType = SqlDbType.Int
+            };
+            command.Parameters.Add(param);
+
+            conn.Open();
+            command.Connection = conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read() == true)
+            {
+                int playerID = reader.GetInt32("player_id");
+                int points = reader.GetInt32("points");
+
+                MatchDayResults.Add(playerID, points);
+
+            }
+            reader.Close();
+            conn.Close();
+            Console.WriteLine("Got Results From Api");
+
+            return MatchDayResults;
+        }
+
+
 
         public Database()
         {
