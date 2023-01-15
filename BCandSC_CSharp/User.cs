@@ -2,15 +2,20 @@
 
 namespace BCandSC_CSharp
 {
-
     public class User
     {
-        public Team Team { get; set; }
-
-        public User(Team team)
+        public string Name { get; set; }
+        public string Username { get; set; }
+        public int Coins { get; set; }
+        public Team? Team { get; set; }
+        public User(string name, string username, int coins)
         {
-            Team = team;
+            Name = name;
+            Username = username;
+            Coins = coins;
+        
         }
+
     }
 
 }

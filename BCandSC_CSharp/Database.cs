@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Numerics;
 using System.Threading.Tasks;
 
 namespace BCandSC_CSharp
@@ -91,6 +92,59 @@ namespace BCandSC_CSharp
 
             return MatchDayResults;
         }
+
+
+
+
+        public Team GetSavedTeam(int teamID)
+        {
+            Team team = new Team();
+            List<Player> players = new List<Player>();
+
+            SqlCommand command = new SqlCommand("SELECT PlayerTeam.player_id, PlayerTeam.team_id, Team.matchday," +
+                " Team.name AS team_name, Player.name AS player_name, Player.position" +
+                " FROM PlayerTeam " +
+                "INNER JOIN Team ON PlayerTeam.team_id =Team.team_id " +
+                "INNER JOIN Player ON PlayerTeam.player_id = Player.player_id" +
+                " WHERE PlayerTeam.team_id=@teamID");
+
+            SqlParameter param = new SqlParameter
+            {
+                ParameterName = "@teamID",
+                Value = teamID,
+                SqlDbType = SqlDbType.Int
+            };
+            command.Parameters.Add(param);
+
+            conn.Open();
+            command.Connection = conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            if (reader.Read() == true)
+            {
+                team.TeamId = reader.GetInt32("team_id");
+                team.Name = reader.GetString("team_name");
+
+                while (reader.Read() == true)
+                {
+                    Player player = new Player();
+                    player.Id = reader.GetInt32("player_id");
+                    player.Name = reader.GetString("player_name");
+                    player.Position = (Player.PlayerPosition)reader.GetInt32("position");
+                    players.Add(player);
+
+                }
+
+                team.Players = players;
+            }
+
+            reader.Close();
+            conn.Close();
+           
+            return team;
+        }
+
 
 
 

@@ -49,11 +49,13 @@ namespace BCandSC_CSharp.Pages
 
                 //nur für test
                 Database db = new();
-                Team team1 = new(db.GetPlayers().Where(p => p.Position == Player.PlayerPosition.Defense).ToList());
-                Team team2 = new(db.GetPlayers().Where(p => p.Position == Player.PlayerPosition.Midfield).ToList());
+                Team team1 = db.GetSavedTeam(1);
+                Team team2 = db.GetSavedTeam(2);
 
-                User user1 = new(team1);
-                User user2 = new(team2);
+                User user1 = new("Peter Lustig","plustig",12222);
+                User user2 = new("Bob Ross", "Ross", 44444);
+                user1.Team= team1;
+                user2.Team= team2;
 
 
                 Gamelogic gamelogic=new Gamelogic(user1, user2,1);

@@ -26,11 +26,11 @@
             if (pointsForTeamUser1> pointsForTeamUser2)
             {
             
-                Console.WriteLine("User1 wins");
+                Console.WriteLine(user1.Name+" wins"+ " with "+user1.Coins+" Coins");
             }
             else
             {
-                Console.WriteLine("User2 wins");
+                Console.WriteLine(user2.Name + " wins" + " with" + user2.Coins+ " Coins");
 
             }
 
