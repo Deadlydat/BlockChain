@@ -1,4 +1,7 @@
-﻿namespace BCandSC_CSharp
+﻿using System.Data.SqlClient;
+using System.Data;
+
+namespace BCandSC_CSharp
 {
     public class Gamelogic
     {
@@ -17,49 +20,55 @@
         public void GetResultsForMatch()
         {
             Database db = new();
-            Dictionary<int, int> MatchDayResults = db.GetResultsFormApi(matchDay);
+            Dictionary<int, int> MatchDayResults = GetResultsFormApi(matchDay);
 
-            int pointsForTeamUser1 = GetPointsForEachTeam(user1, MatchDayResults);
-            int pointsForTeamUser2 = GetPointsForEachTeam(user2, MatchDayResults);
+            //int pointsForTeamUser1 = GetPointsForEachTeam(user1, MatchDayResults);
+            //int pointsForTeamUser2 = GetPointsForEachTeam(user2, MatchDayResults);
 
-
-            if (pointsForTeamUser1> pointsForTeamUser2)
-            {
-            
-                Console.WriteLine(user1.Name+" wins"+ " with "+user1.Coins+" Coins");
-            }
-            else
-            {
-                Console.WriteLine(user2.Name + " wins" + " with" + user2.Coins+ " Coins");
-
-            }
-
-
+            //if (pointsForTeamUser1 > pointsForTeamUser2)
+            //{
+            //    Console.WriteLine(user1.Name + " wins" + " with Coins");
+            //}
+            //else
+            //{
+            //    Console.WriteLine(user2.Name + " wins" + " with Coins");
+            //}
 
         }
 
-        public int GetPointsForEachTeam(User user, Dictionary<int, int> MatchDayResults)
+
+        public Dictionary<int, int> GetResultsFormApi(int matchDay)
         {
-            int points = 0;
-            user.Team.Players.ForEach(element =>
+            Database db = new();
+            Dictionary<int, int> MatchDayResults = new Dictionary<int, int>();
+            SqlCommand command = new SqlCommand("SELECT * FROM PlayerPoints WHERE matchday =@matchDay");
+
+            SqlParameter param = new SqlParameter
             {
-                MatchDayResults.TryGetValue(element.Id, out int value);
-                points += value;
-        
+                ParameterName = "@matchDay",
+                Value = matchDay,
+                SqlDbType = SqlDbType.Int
+            };
+            command.Parameters.Add(param);
 
-            });
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
 
-            
-            return points;
+            while (reader.Read() == true)
+            {
+                int playerID = reader.GetInt32("player_id");
+                int points = reader.GetInt32("points");
+
+                MatchDayResults.Add(playerID, points);
+
+            }
+            reader.Close();
+            db.conn.Close();
+            Console.WriteLine("Got Results From Api");
+
+            return MatchDayResults;
         }
-
-
-
-
-
-
-
-
 
     }
 

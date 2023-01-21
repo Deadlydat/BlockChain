@@ -1,29 +1,23 @@
 ﻿@page
-@model IndexModel
+@model LoginModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Login";
 }
 
-<form method="post">
-    <div class="field">
-        <div class="field-headline">
-            <label class="field-headline-coins">220.000.000</label>
-            <label class="field-headline-text">GCoins</label>
-        </div>
-        <div class="field-formations">
-            @*<div class="field-formation"><button name="formation" value="352" type="submit" asp-page-handler="SelectFormation">3-5-2</button></div>
-            <div class="field-formation"><button name="formation" value="343" type="submit" asp-page-handler="SelectFormation">3-4-3</button></div>
-            <div class="field-formation"><button name="formation" value="451" type="submit" asp-page-handler="SelectFormation">4-5-1</button></div>
-            <div class="field-formation"><button name="formation" value="433" type="submit" asp-page-handler="SelectFormation">4-3-3</button></div>
-            <div class="field-formation"><button name="formation" value="442" type="submit" asp-page-handler="SelectFormation">4-4-2</button></div>
-            <div class="field-formation"><button name="formation" value="532" type="submit" asp-page-handler="SelectFormation">5-3-2</button></div>*@
-            <div class="field-formation"><a asp-route-formation="352" asp-page="/Formation">3-5-2</a></div>
-            <div class="field-formation"><a asp-route-formation="343" asp-page="/Formation">3-4-3</a></div>
-            <div class="field-formation"><a asp-route-formation="451" asp-page="/Formation">4-5-1</a></div>
-            <div class="field-formation"><a asp-route-formation="433" asp-page="/Formation">4-3-3</a></div>
-            <div class="field-formation"><a asp-route-formation="442" asp-page="/Formation">4-4-2</a></div>
-            <div class="field-formation"><a asp-route-formation="532" asp-page="/Formation">5-3-2</a></div>
-        </div>
-    </div>
+<h2>@ViewData["Title"]</h2>
 
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Log in" asp-page-handler="Login" class="btn btn-primary" />
+        <input type="submit" value="Sign Up" asp-page-handler="SignUp" class="btn btn-primary" />
+    </div>
 </form>

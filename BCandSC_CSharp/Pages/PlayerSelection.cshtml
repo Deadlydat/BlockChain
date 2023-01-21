@@ -1,0 +1,114 @@
+﻿@page
+@model BCandSC_CSharp.Pages.PlayerSelectionModel
+@{
+    ViewData["Title"] = "Player Selection";
+}
+
+<form method="post">
+    @{
+        if (Model.team.Count == 11)
+        {
+            <input type="submit" value="Test" asp-route-method="done" class="btn btn-primary" />
+        }
+    }
+    <div class="field">
+        <div class="field-headline">
+            <label class="field-headline-coins">220.000.000</label>
+            <label class="field-headline-text">GCoins</label>
+        </div>
+
+        <div class="field-players @Model.FormationString">
+
+            @{
+                string namelist = "";
+
+                foreach(Player.PlayerPosition position in Model.FormationList){;
+                    string name = "Name";                   
+
+                    foreach(Player p in Model.team.Where(_p => _p.Position == position)){
+                        if(namelist.Contains(p.Name) == false){
+                            name = p.Name;
+                            namelist += p.Name + ";";
+                            break;
+                        }
+                    }
+
+                    <div class="field-player">
+                        <div class="field-player-picture">
+                            <button class="field-player-button" asp-route-addtype="@position.ToString()" asp-route-method="showcarousel" asp-route-existingplayer="@name"></button>
+                        </div>
+                        <div class="field-player-name">
+                            <label>@name</label>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+    <div class="player-carousel">
+        @{
+
+            for (int i = 0; i < Model.CarouselPlayers.Count; i++)
+            {
+                <button class="card-button" asp-route-player="@i" asp-route-method="addplayer">
+                    <div class="player-card">
+                        <div class="player-card-main">
+                            <div class="player-name">
+                                <label class="first-name">@Model.CarouselPlayers[i].Name</label>
+                                <label class="last-name">@Model.CarouselPlayers[i].Name</label>
+                            </div>
+                            <div class="player-position">
+                                <label class="jersey-number sub-text">7</label>
+                                <label class="position sub-text">MF</label>
+                            </div>
+                            <div class="player-picture">
+                                <img src="img/gnabry.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="player-card-stats">
+                            <div class="stat-box">
+                                <label class="stat-value">146</label>
+                                <label class="stat-name sub-text">Punkte</label>
+                            </div>
+                            <div class="stat-box">
+                                <label class="stat-value">15</label>
+                                <label class="stat-name sub-text">Einsätze</label>
+                            </div>
+                            <div class="stat-box">
+                                <label class="stat-value">10</label>
+                                <label class="stat-name sub-text">Fouls</label>
+                            </div>
+                            <div class="stat-box">
+                                <label class="stat-value">0</label>
+                                <label class="stat-name sub-text">Karten</label>
+                            </div>
+                            <div class="stat-box">
+                                <label class="stat-value">8</label>
+                                <label class="stat-name sub-text">Tore</label>
+                            </div>
+                            <div class="stat-box">
+                                <label class="stat-value">3</label>
+                                <label class="stat-name sub-text">Assits</label>
+                            </div>
+                        </div>
+                        <div class="player-card-points">
+                            <label class="player-points">2.197</label>
+                            <label class="points sub-text">Punkte</label>
+                        </div>
+                        <div class="player-card-value">
+                            <label class="player-value">€35.745.491</label>
+                            <label class="marketvalue sub-text">Marktwert</label>
+                        </div>
+                    </div>
+                </button>
+            }
+
+
+        }
+
+    </div>
+    
+</form>

@@ -5,167 +5,18 @@
 }
 
 <form method="post">
-    @{
-        Console.WriteLine(FormationModel.StrikerCount);
-    }
-
     <div class="field">
         <div class="field-headline">
             <label class="field-headline-coins">220.000.000</label>
             <label class="field-headline-text">GCoins</label>
         </div>
-
-        <div class="field-players @FormationModel.FormationString">
-
-            @{
-                for (int i = 0; i < FormationModel.StrikerCount; i++)
-                {
-                    <div class="field-player striker">
-                        <div class="field-player-picture">
-                            <button class="field-player-button" asp-page-handler="AddStriker"></button>
-                        </div>
-                        <div class="field-player-name">
-                            @{
-                                if (FormationModel.Strikers.Count > i)
-                                {
-                                    <label>@FormationModel.Strikers[i].Name</label>
-                                }
-                                else
-                                {
-                                    <label>Name</label>
-                                }
-                            }
-                        </div>
-                    </div>
-                }
-
-                for (int i = 0; i < FormationModel.MidfielderCount; i++)
-                {
-                    <div class="field-player midfielder">
-                        <div class="field-player-picture">
-                            <button class="field-player-button" asp-page-handler="AddMidfielder"></button>
-                        </div>
-                        <div class="field-player-name">
-                            @{
-                                if (FormationModel.Midfielders.Count > i)
-                                {
-                                    <label>@FormationModel.Midfielders[i].Name</label>
-                                }
-                                else
-                                {
-                                    <label>Name</label>
-                                }
-                            }
-                        </div>
-                    </div>
-                }
-
-                for (int i = 0; i < FormationModel.DefenderCount; i++)
-                {
-                    <div class="field-player defender">
-                        <div class="field-player-picture">
-                            <button class="field-player-button" asp-page-handler="AddDefender"></button>
-                        </div>
-                        <div class="field-player-name">
-                            @{
-                                if (FormationModel.Defenders.Count > i)
-                                {
-                                    <label>@FormationModel.Defenders[i].Name</label>
-                                }
-                                else
-                                {
-                                    <label>Name</label>
-                                }
-                            }
-                        </div>
-                    </div>
-                }
-
-                <div class="field-player goalkeeper">
-                    <div class="field-player-picture">
-                        <button class="field-player-button" asp-page-handler="AddGoalkeeper"></button>
-                    </div>
-                    <div class="field-player-name">
-                        @{
-                            if (@FormationModel.Goalkeeper != null)
-                            {
-                                <label>@FormationModel.Goalkeeper.Name</label>
-                            }
-                            else
-                            {
-                                <label>Name</label>
-                            }
-                        }
-
-                    </div>
-                </div>
-            }
-
+        <div class="field-formations">
+            <div class="field-formation"><a asp-route-formation="f352" asp-route-user="@Model.userId" asp-page="/PlayerSelection">3-5-2</a></div>
+            <div class="field-formation"><a asp-route-formation="f343" asp-route-user="@Model.userId" asp-page="/PlayerSelection">3-4-3</a></div>
+            <div class="field-formation"><a asp-route-formation="f451" asp-route-user="@Model.userId" asp-page="/PlayerSelection">4-5-1</a></div>
+            <div class="field-formation"><a asp-route-formation="f433" asp-route-user="@Model.userId" asp-page="/PlayerSelection">4-3-3</a></div>
+            <div class="field-formation"><a asp-route-formation="f442" asp-route-user="@Model.userId" asp-page="/PlayerSelection">4-4-2</a></div>
+            <div class="field-formation"><a asp-route-formation="f532" asp-route-user="@Model.userId" asp-page="/PlayerSelection">5-3-2</a></div>
         </div>
-
     </div>
-
-    <div class="player-carousel">
-        @{
-
-            for (int i = 0; i < FormationModel.CarouselPlayers.Count; i++)
-            {
-                <button class="card-button" asp-page-handler="AddCarouselPlayer" asp-route-player="@i">
-                    <div class="player-card">
-                        <div class="player-card-main">
-                            <div class="player-name">
-                                <label class="first-name">@FormationModel.CarouselPlayers[i].Name</label>
-                                <label class="last-name">@FormationModel.CarouselPlayers[i].Name</label>
-                            </div>
-                            <div class="player-position">
-                                <label class="jersey-number sub-text">7</label>
-                                <label class="position sub-text">MF</label>
-                            </div>
-                            <div class="player-picture">
-                                <img src="img/gnabry.jpg" alt="">
-                            </div>
-                        </div>
-                        <div class="player-card-stats">
-                            <div class="stat-box">
-                                <label class="stat-value">146</label>
-                                <label class="stat-name sub-text">Punkte</label>
-                            </div>
-                            <div class="stat-box">
-                                <label class="stat-value">15</label>
-                                <label class="stat-name sub-text">Einsätze</label>
-                            </div>
-                            <div class="stat-box">
-                                <label class="stat-value">10</label>
-                                <label class="stat-name sub-text">Fouls</label>
-                            </div>
-                            <div class="stat-box">
-                                <label class="stat-value">0</label>
-                                <label class="stat-name sub-text">Karten</label>
-                            </div>
-                            <div class="stat-box">
-                                <label class="stat-value">8</label>
-                                <label class="stat-name sub-text">Tore</label>
-                            </div>
-                            <div class="stat-box">
-                                <label class="stat-value">3</label>
-                                <label class="stat-name sub-text">Assits</label>
-                            </div>
-                        </div>
-                        <div class="player-card-points">
-                            <label class="player-points">2.197</label>
-                            <label class="points sub-text">Punkte</label>
-                        </div>
-                        <div class="player-card-value">
-                            <label class="player-value">€35.745.491</label>
-                            <label class="marketvalue sub-text">Marktwert</label>
-                        </div>
-                    </div>
-                </button>
-            }
-
-
-        }
-
-    </div>
-
 </form>
