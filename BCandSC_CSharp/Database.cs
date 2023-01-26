@@ -11,6 +11,7 @@ namespace BCandSC_CSharp
 
         public Database()
         {
+        
             conn = new SqlConnection();
             conn.ConnectionString = "Data Source=public.emmel-it.de, 1533;User ID=BCandSC;Password=FHWS2022;";
         }

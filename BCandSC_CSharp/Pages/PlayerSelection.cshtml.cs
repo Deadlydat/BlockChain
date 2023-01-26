@@ -35,6 +35,15 @@ namespace BCandSC_CSharp.Pages
 
         public IActionResult OnPost()
         {
+
+            //für test
+           BlockchainInterface abi = new BlockchainInterface();
+            
+           
+
+
+
+
             getValues();
             setFormation();
 
