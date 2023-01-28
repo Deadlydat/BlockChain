@@ -37,10 +37,10 @@ namespace BCandSC_CSharp.Pages
         {
 
             //für test
-           BlockchainInterface abi = new BlockchainInterface();
-            
-           
+            //  BlockchainInterface abi = new BlockchainInterface();
 
+
+            BlockchainAPI.GetETHValueFromApi();
 
 
 

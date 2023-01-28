@@ -29,7 +29,7 @@ namespace BCandSC_CSharp
             {
                 // Setup
                 // Here we're using local chain eg Geth https://github.com/Nethereum/TestChains#geth
-                var url = "http://localhost:8545";
+                var url = "HTTP://192.168.178.27:7545";
                 var privateKey = "0xb5b1870957d373ef0eeffecc6e4812c0fd08f554b37b233526acc331bf1544f7";
                 var account = new Account(privateKey);
                 var web3 = new Web3(account, url);
