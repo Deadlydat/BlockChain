@@ -13,8 +13,8 @@
     }
     <div class="field">
         <div class="field-headline">
-            <label class="field-headline-coins">220.000.000</label>
-            <label class="field-headline-text">GCoins</label>
+            <label class="field-headline-coins">@Model.Coins</label>&nbsp;
+            <label class="field-headline-text">Coins verfügbar</label>
         </div>
 
         <div class="field-players @Model.FormationString">
@@ -22,7 +22,7 @@
             @{
                 string namelist = "";
 
-                foreach(Player.PlayerPosition position in Model.FormationList){;
+                foreach(Player.PlayerPosition position in Model.FormationList){
                     string name = "Name";                   
 
                     foreach(Player p in Model.team.Where(_p => _p.Position == position)){
@@ -49,8 +49,8 @@
     </div>
 
     <div class="player-carousel">
-        @{
 
+        @{
             for (int i = 0; i < Model.CarouselPlayers.Count; i++)
             {
                 <button class="card-button" asp-route-player="@i" asp-route-method="addplayer">
@@ -74,7 +74,7 @@
                                 <label class="stat-name sub-text">Punkte</label>
                             </div>
                             <div class="stat-box">
-                                <label class="stat-value">15</label>
+                                <label class="stat-value">@Model.CarouselPlayers[i].Einsaetze</label>
                                 <label class="stat-name sub-text">Einsätze</label>
                             </div>
                             <div class="stat-box">
@@ -86,7 +86,7 @@
                                 <label class="stat-name sub-text">Karten</label>
                             </div>
                             <div class="stat-box">
-                                <label class="stat-value">8</label>
+                                <label class="stat-value">@Model.CarouselPlayers[i].Tore</label>
                                 <label class="stat-name sub-text">Tore</label>
                             </div>
                             <div class="stat-box">
@@ -99,7 +99,7 @@
                             <label class="points sub-text">Punkte</label>
                         </div>
                         <div class="player-card-value">
-                            <label class="player-value">€35.745.491</label>
+                            <label class="player-value">@Model.CarouselPlayers[i].Marktwert</label>
                             <label class="marketvalue sub-text">Marktwert</label>
                         </div>
                     </div>

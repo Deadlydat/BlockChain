@@ -17,6 +17,8 @@ label{
     display: flex;
     gap: 10px;
     top: 450px;
+    width: 600px;
+    overflow-x: scroll;
 }
 
 .field-player-button {

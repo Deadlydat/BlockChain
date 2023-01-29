@@ -9,6 +9,12 @@ namespace BCandSC_CSharp
         public int Id { get; set; } = -1;
         public string Name { get; set; } = "";
         public PlayerPosition Position { get; set; } = PlayerPosition.Unknwon;
+        public int Points { get; set; } = 0;
+        public int Marktwert { get; set; } = 0;
+        public int Nummer { get; set; } = 0;
+        public int Einsaetze { get; set; } = 0;
+        public int Tore { get; set; } = 0;
+        public string Mannschaft { get; set; } = "";
 
         public enum PlayerPosition
         {
@@ -35,6 +41,11 @@ namespace BCandSC_CSharp
             {
                 player.Id = reader.GetInt32("player_id");
                 player.Name = reader.GetString("name");
+                player.Marktwert = reader.GetInt32("marktwert");
+                player.Einsaetze = reader.GetInt32("einsaetze");
+                player.Tore = reader.GetInt32("tore");
+                player.Mannschaft = reader.GetString("verein");
+                player.Position = (Player.PlayerPosition)reader.GetInt32("position");
             }
             reader.Close();
             db.conn.Close();
@@ -58,6 +69,10 @@ namespace BCandSC_CSharp
                 player.Id = reader.GetInt32("player_id");
                 player.Name = reader.GetString("name");
                 player.Position = (Player.PlayerPosition)reader.GetInt32("position");
+                player.Marktwert = reader.GetInt32("marktwert");
+                player.Einsaetze = reader.GetInt32("einsaetze");
+                player.Tore = reader.GetInt32("tore");
+                player.Mannschaft = reader.GetString("verein");
                 players.Add(player);
             }
             reader.Close();
@@ -70,7 +85,7 @@ namespace BCandSC_CSharp
         {
             Database db = new();
             List<Player> players = new();
-            SqlCommand command = new SqlCommand("SELECT * FROM Player WHERE (position = @position)");
+            SqlCommand command = new SqlCommand("SELECT TOP (1000) [player_id],[name],[verein],[position],[marktwert],[einsaetze],[tore] FROM Player WHERE (position = @position) ORDER BY marktwert DESC");
             SqlParameter param = new SqlParameter { ParameterName = "@position", Value = (int)position, SqlDbType = SqlDbType.Int };
             command.Parameters.Add(param);
 
@@ -84,6 +99,10 @@ namespace BCandSC_CSharp
                 player.Id = reader.GetInt32("player_id");
                 player.Name = reader.GetString("name");
                 player.Position = (Player.PlayerPosition)reader.GetInt32("position");
+                player.Marktwert = reader.GetInt32("marktwert");
+                player.Einsaetze = reader.GetInt32("einsaetze");
+                player.Tore = reader.GetInt32("tore");
+                player.Mannschaft = reader.GetString("verein");
                 players.Add(player);
             }
             reader.Close();

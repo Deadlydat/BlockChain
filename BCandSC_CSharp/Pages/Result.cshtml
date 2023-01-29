@@ -1,0 +1,25 @@
+﻿@page
+@model BCandSC_CSharp.Pages.ResultModel
+@{
+    ViewData["Title"] = "Ergebnis";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <label>Ihr Team hat für diesen Spieltag @Model.team.TotalPoints Punkte erreicht!</label>
+</div>
+
+<div>
+    <label>Team: @Model.team.Name</label>
+</div>
+
+@{
+    foreach(Player p in Model.team.Players){
+        <div>
+            <label>@p.Position.ToString(): @p.Name</label>
+        </div>
+    }
+}
+
+

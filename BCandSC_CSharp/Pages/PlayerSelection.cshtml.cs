@@ -17,12 +17,13 @@ namespace BCandSC_CSharp.Pages
         public List<Player.PlayerPosition> FormationList { get; set; } = new();
         public List<Player> CarouselPlayers { get; set; } = new();
         public List<Player> team { get; set; } = new();
+        public int Coins { get; set; } = 0;
 
         public IActionResult OnGet()
         {
             if (Request.Query.ContainsKey("formation"))
                 FormationString = Request.Query["formation"];
-            if(Request.Query.ContainsKey("user"))
+            if (Request.Query.ContainsKey("user"))
                 UserId = Convert.ToInt32(Request.Query["user"].ToString());
 
             TempData.Clear();
@@ -43,7 +44,7 @@ namespace BCandSC_CSharp.Pages
             {
                 Player.PlayerPosition pos = Enum.Parse<Player.PlayerPosition>(Request.Query["addtype"]);
                 ShowCarousel(pos);
-                if(Request.Query["existingplayer"].ToString() != "Name")
+                if (Request.Query["existingplayer"].ToString() != "Name")
                 {
                     TempData["existingplayer"] = Request.Query["existingplayer"].ToString();
                 }
@@ -59,10 +60,12 @@ namespace BCandSC_CSharp.Pages
             if (Request.Query["method"] == "done")
             {
                 Team t = new();
-                t.SaveTeam(UserId, team, "test", 999);
+                t.SaveTeam(UserId, team, Enviroment.GetEnviroment().Matchday);
+                return RedirectToPage("/Result", new { userId = UserId });
             }
 
             setValues();
+
             return Page();
         }
 
@@ -78,14 +81,24 @@ namespace BCandSC_CSharp.Pages
                 FormationString = (string)TempData["formation"]!;
             if (TempData["userid"] != null)
                 UserId = Convert.ToInt32(TempData["userid"])!;
+
+            Coins = Enviroment.GetEnviroment().Coins;
+            int TeamWorth = team.Sum(p => p.Marktwert);
+
+            Coins = Coins - TeamWorth;
         }
 
         public void setValues()
         {
             TempData["userid"] = UserId.ToString();
             TempData["team"] = JsonConvert.SerializeObject(team);
-            TempData["carousel"] = JsonConvert.SerializeObject(CarouselPlayers); 
+            TempData["carousel"] = JsonConvert.SerializeObject(CarouselPlayers);
             TempData["formation"] = FormationString;
+
+            Coins = Enviroment.GetEnviroment().Coins;
+            int TeamWorth = team.Sum(p => p.Marktwert);
+
+            Coins = Coins - TeamWorth;
         }
 
         public void ShowCarousel(Player.PlayerPosition position)
@@ -93,14 +106,16 @@ namespace BCandSC_CSharp.Pages
             getValues();
 
             Player player = new();
-            CarouselPlayers = player.GetPlayers(position);
+            CarouselPlayers = player.GetPlayers(position).Where(p => p.Marktwert < Coins).ToList();
+            if (CarouselPlayers.Count > 30)
+                CarouselPlayers = CarouselPlayers.GetRange(0, 30);
 
-            foreach(Player p in team)
+            foreach (Player p in team)
             {
                 Player? tmp = CarouselPlayers.Find(pl => pl.Id == p.Id);
-                if(tmp != null)
+                if (tmp != null)
                     CarouselPlayers.Remove(tmp);
-            }            
+            }
 
             setValues();
         }
@@ -117,9 +132,9 @@ namespace BCandSC_CSharp.Pages
 
         public void setFormation()
         {
-            for(int i = 0; i < (int)Convert.ToUInt32(FormationString[3].ToString()); i++) { FormationList.Add(Player.PlayerPosition.Striker); }
-            for(int i = 0; i < (int)Convert.ToUInt32(FormationString[2].ToString()); i++) { FormationList.Add(Player.PlayerPosition.Midfield); }
-            for(int i = 0; i < (int)Convert.ToUInt32(FormationString[1].ToString()); i++) { FormationList.Add(Player.PlayerPosition.Defense); }
+            for (int i = 0; i < (int)Convert.ToUInt32(FormationString[3].ToString()); i++) { FormationList.Add(Player.PlayerPosition.Striker); }
+            for (int i = 0; i < (int)Convert.ToUInt32(FormationString[2].ToString()); i++) { FormationList.Add(Player.PlayerPosition.Midfield); }
+            for (int i = 0; i < (int)Convert.ToUInt32(FormationString[1].ToString()); i++) { FormationList.Add(Player.PlayerPosition.Defense); }
             FormationList.Add(Player.PlayerPosition.Goal);
         }
     }
