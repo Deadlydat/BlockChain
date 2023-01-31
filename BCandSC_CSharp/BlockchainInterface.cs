@@ -4,9 +4,7 @@ using static BCandSC_CSharp.Player;
 using Nethereum.Contracts.Standards.ENS.PublicResolver.ContractDefinition;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
-using SimpleStorage.Betting.ContractDefinition;
-using SimpleStorage.Betting;
-using SimpleStorage.Betting.ContractDefinition;
+
 using Nethereum.Contracts;
 using System.Numerics;
 using Newtonsoft.Json.Linq;
