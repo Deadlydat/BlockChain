@@ -9,6 +9,7 @@ namespace BCandSC_CSharp
         public string Name { get; set; } = "";
         public List<Player> Players { get; set; } = new List<Player>();
         public int TotalPoints { get; set; } = 0;
+        public string Formation { get; set; } = "";
 
         public void CreateTeam(int userid, string name, int matchday)
         {
@@ -34,20 +35,16 @@ namespace BCandSC_CSharp
             }
         }
 
-        public void SaveTeam(int userid, List<Player> players, int matchday)
+        public void SetFormation(int teamid, string formation)
         {
             Database db = new();
             try
             {
-                Id = GetTeam(userid, matchday).Id;                             
-                string comtext = "";
-                foreach(Player p in players)
-                {
-                    comtext += $"INSERT INTO PlayerTeam (player_id, team_id) VALUES (CAST({p.Id} AS int), CAST({Id} AS int));";
-                }
+                SqlCommand command = new SqlCommand("UPDATE Team SET formation = @formation WHERE team_id = @team_id");
+                command.Parameters.Add(new SqlParameter { ParameterName = "@team_id", Value = teamid, SqlDbType = SqlDbType.Int });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@formation", Value = formation, SqlDbType = SqlDbType.NVarChar, Size = 4 });
 
                 db.conn.Open();
-                SqlCommand command = new SqlCommand(comtext);
                 command.Connection = db.conn;
                 command.ExecuteNonQuery();
             }
@@ -76,6 +73,8 @@ namespace BCandSC_CSharp
             if (reader.Read())
             {
                 team.Id = reader.GetInt32("team_id");
+                team.Formation = reader.GetString("formation");
+                team.Name = reader.GetString("name");
             }
             reader.Close();
             db.conn.Close();

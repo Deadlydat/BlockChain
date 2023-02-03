@@ -44,8 +44,8 @@ namespace BCandSC_CSharp.Pages
             //Player p = new();
 
             //return RedirectToPage("/Result", new { userId = 1 });
-            return RedirectToPage("/Matchday", new { userId = 1 });
-            //return Page();
+            //return RedirectToPage("/Matchday", new { userId = 1 });
+            return Page();
         }
 
 

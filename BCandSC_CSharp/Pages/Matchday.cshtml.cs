@@ -20,8 +20,16 @@ namespace BCandSC_CSharp.Pages
         public IActionResult OnGet()
         {
             Matchday = Enviroment.GetEnviroment().Matchday;
-            if (team.GetTeam(userId, Matchday).Id > 0)
+            Team t = team.GetTeam(userId, Matchday);
+
+            if (t.Players.Count == 11)
                 return RedirectToPage("/Result", new { userId = userId });
+
+            if (t.Formation != "")
+                return RedirectToPage("/PlayerSelection", new { UserId = userId });
+
+            if (t.Id > 0)
+                return RedirectToPage("/Formation", new { userId = userId });
 
             return Page();
         }
