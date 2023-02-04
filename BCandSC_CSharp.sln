@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCandSC_CSharp", "BCandSC_CSharp\BCandSC_CSharp.csproj", "{05AD08F9-D34F-499C-ADA5-A5BC4204EA5C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStorage", "SimpleStorage\SimpleStorage.csproj", "{37E82E9D-BA8D-4963-A4E1-552A080B0A88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Betting", "SimpleStorage\Betting.csproj", "{37E82E9D-BA8D-4963-A4E1-552A080B0A88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
