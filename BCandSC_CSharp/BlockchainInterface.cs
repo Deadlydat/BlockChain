@@ -15,10 +15,10 @@ namespace BCandSC_CSharp
 {
     public class BlockchainInterface
     {
-        private const string Url = "HTTP://192.168.178.27:7545";
+        private const string Url = "https://rpc.goerli.mudit.blog";
         // this is the private key of the contract owner
-        private const string PrivateKey = "0x840af416508488a7ef3f7e822d71b381235bae6c1286f9203d1d89818a7dcb47";
-        private const string ContractAddress = "0x9314658625A4a4c212859Abd15D6A168aE6d6731";
+        private const string PrivateKey = "0xc815fa507181842ea2c85b12d75dc162b633d1c69d87e351bb86406f3db5b72f";
+        private const string ContractAddress = "0xE1D9739D0CF03fC0396892ba682ed1E6d008C730";
         private Account _account;
         private Web3 _web3;
         private BettingService _bettingService;
@@ -35,10 +35,10 @@ namespace BCandSC_CSharp
             Demo().Wait();
         }
 
-        public static void Main()
-        {
-            var blockchainInterface = new BlockchainInterface();
-        }
+        //public static void Main()
+        //{
+        //    var blockchainInterface = new BlockchainInterface();
+        //}
 
         public JArray Bet(string teamRepresentation, string privateKey)
         {
@@ -113,14 +113,14 @@ namespace BCandSC_CSharp
 
                 Console.WriteLine("Start.");
 
-                Console.WriteLine("First Bet...");
-                Console.WriteLine(Bet("HAHA", "0x1c7a3d64bf03314cd99cbadc1aac27a96512efb1c5adc2e3994f0533be1571da"));
-                Console.WriteLine("Second Bet...");
-                Console.WriteLine(Bet("BEBE", "0xf3b96df77469e17a768461fd086071ee06fdf662bad857bc56dfa1d50dd164fb"));
-                Console.WriteLine("Start Game...");
-                Console.WriteLine(StartGame(PrivateKey));
-                Console.WriteLine("Finish Game...");
-                Console.WriteLine(FinishGame(PrivateKey));
+                //Console.WriteLine("First Bet...");
+                //Console.WriteLine(Bet("HAHA", "0x1c7a3d64bf03314cd99cbadc1aac27a96512efb1c5adc2e3994f0533be1571da"));
+                //Console.WriteLine("Second Bet...");
+                //Console.WriteLine(Bet("BEBE", "0xf3b96df77469e17a768461fd086071ee06fdf662bad857bc56dfa1d50dd164fb"));
+                //Console.WriteLine("Start Game...");
+                //Console.WriteLine(StartGame(PrivateKey));
+                //Console.WriteLine("Finish Game...");
+                //Console.WriteLine(FinishGame(PrivateKey));
                 Console.WriteLine("MoneyPool:");
                 Console.WriteLine(GetMoneyPool());
                 Console.WriteLine("Player count:");
