@@ -19,6 +19,10 @@ namespace BCandSC_CSharp
         {
 
             var engine = Python.CreateEngine();
+
+
+            var libs = new[] { @"C:\Users\Workstation\Documents\GitHub\Blockchain\Lib" };
+            engine.SetSearchPaths(libs);
             //reading code from file
             var source = engine.CreateScriptSourceFromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "main.py"));
             var scope = engine.CreateScope();
