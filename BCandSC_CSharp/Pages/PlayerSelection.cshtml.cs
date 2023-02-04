@@ -36,8 +36,8 @@ namespace BCandSC_CSharp.Pages
         public IActionResult OnPost()
         {
 
-            //für test
-            Blockchaininterface abi = new Blockchaininterface();
+            //fï¿½r test
+            BlockchainInterface abi = new BlockchainInterface();
 
 
             //BlockchainAPI.GetETHValueFromApi();
@@ -58,13 +58,13 @@ namespace BCandSC_CSharp.Pages
                 }
             }
 
-            //Ausgewählten Spieler dem Team hinzufügen
+            //Ausgewï¿½hlten Spieler dem Team hinzufï¿½gen
             if (Request.Query["method"] == "addplayer")
             {
                 AddPlayerToTeam();
             }
 
-            //Team erstellen noch auf Testbasis (Wo kommt matchday her? Teamname Eingabe hinzufügen)
+            //Team erstellen noch auf Testbasis (Wo kommt matchday her? Teamname Eingabe hinzufï¿½gen)
             if (Request.Query["method"] == "done")
             {
                 Team t = new();
