@@ -8,6 +8,9 @@ namespace BCandSC_CSharp
     {
         public int Id { get; set; } = -1;
         public string Name { get; set; } = "";
+        public string ContactAddress { get; set; } = "";
+        public string PrivateKey { get; set; } = "";
+
 
         public User GetUser(string name, string password)
         {
@@ -15,11 +18,13 @@ namespace BCandSC_CSharp
             Database db = new();
 
             SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE ([name] = @name) AND ([password] = @password)");
-            SqlParameter param1 = new SqlParameter {ParameterName = "@name", Value = name, SqlDbType = SqlDbType.NVarChar, Size = 30};
-            SqlParameter param2 = new SqlParameter {ParameterName = "@password", Value = password, SqlDbType = SqlDbType.NVarChar, Size = 50};
+            SqlParameter param1 = new SqlParameter { ParameterName = "@name", Value = name, SqlDbType = SqlDbType.NVarChar, Size = 30 };
+            SqlParameter param2 = new SqlParameter { ParameterName = "@password", Value = password, SqlDbType = SqlDbType.NVarChar, Size = 50 };
+           
 
             command.Parameters.Add(param1);
             command.Parameters.Add(param2);
+          
             db.conn.Open();
             command.Connection = db.conn;
 
@@ -30,9 +35,11 @@ namespace BCandSC_CSharp
                 {
                     user.Id = reader.GetInt32("user_id");
                     user.Name = reader.GetString("name");
+                    user.ContactAddress=reader.GetString("contract_address");
+                    user.PrivateKey = reader.GetString("private_key");
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.Write(e.Message);
             }
@@ -40,7 +47,7 @@ namespace BCandSC_CSharp
             {
                 db.conn.Close();
             }
-
+           
             return user;
         }
 
