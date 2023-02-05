@@ -6,42 +6,115 @@
 
 <form method="post">
     @{
-        if (Model.team.Count == 11)
+        if (Model.team.Players.Count == 11)
         {
             <input type="submit" value="Test" asp-route-method="done" class="btn btn-primary" />
         }
     }
     <div class="field">
         <div class="field-headline">
-            <label class="field-headline-coins">220.000.000</label>
-            <label class="field-headline-text">GCoins</label>
+            <label class="field-headline-coins">@Model.enviroment.Coins</label>&nbsp;
+            <label class="field-headline-text">Coins verfügbar</label>
         </div>
 
-        <div class="field-players @Model.FormationString">
+        <div class="field-players @Model.team.Formation">
 
             @{
-                string namelist = "";
+                string name = "";
+                int id = 0;
 
-                foreach(Player.PlayerPosition position in Model.FormationList){;
-                    string name = "Name";                   
-
-                    foreach(Player p in Model.team.Where(_p => _p.Position == position)){
-                        if(namelist.Contains(p.Name) == false){
-                            name = p.Name;
-                            namelist += p.Name + ";";
-                            break;
-                        }
+                for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[3].ToString()); i++)
+                {
+                    id = 0;
+                    name = "Name";
+                    if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).Count() > i)
+                    {
+                        name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).ToList()[i]).Name;
+                        id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).ToList()[i]).Id;
                     }
 
                     <div class="field-player">
                         <div class="field-player-picture">
-                            <button class="field-player-button" asp-route-addtype="@position.ToString()" asp-route-method="showcarousel" asp-route-existingplayer="@name"></button>
+                            <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Striker.ToString()" asp-route-method="showcarousel"></button>
                         </div>
                         <div class="field-player-name">
                             <label>@name</label>
                         </div>
+                        @if (@id > 0)
+                        {
+                            <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                        }
                     </div>
                 }
+
+                for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[2].ToString()); i++)
+                {
+                    id = 0;
+                    name = "Name";
+                    if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).Count() > i)
+                    {
+                        name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).ToList()[i]).Name;
+                        id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).ToList()[i]).Id;
+                    }
+
+                    <div class="field-player">
+                        <div class="field-player-picture">
+                            <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Midfield.ToString()" asp-route-method="showcarousel"></button>
+                        </div>
+                        <div class="field-player-name">
+                            <label>@name</label>
+                        </div>
+                        @if (@id > 0)
+                        {
+                            <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                        }
+                    </div>
+                }
+
+                for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[1].ToString()); i++)
+                {
+                    id = 0;
+                    name = "Name";
+                    if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).Count() > i)
+                    {
+                        name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).ToList()[i]).Name;
+                        id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).ToList()[i]).Id;
+                    }
+
+                    <div class="field-player">
+                        <div class="field-player-picture">
+                            <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Defense.ToString()" asp-route-method="showcarousel"></button>
+                        </div>
+                        <div class="field-player-name">
+                            <label>@name</label>
+                        </div>
+                        @if (@id > 0)
+                        {
+                            <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                        }
+                    </div>
+                }
+
+                id = 0;
+                name = "Name";
+                if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).Count() > 0)
+                {
+                    name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).ToList()[0]).Name;
+                    id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).ToList()[0]).Id;
+                }
+
+                <div class="field-player">
+                    <div class="field-player-picture">
+                        <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Goal.ToString()" asp-route-method="showcarousel"></button>
+                    </div>
+                    <div class="field-player-name">
+                        <label>@name</label>
+                    </div>
+                    @if (@id > 0)
+                    {
+                        <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                    }
+                </div>
             }
 
         </div>
@@ -49,11 +122,11 @@
     </div>
 
     <div class="player-carousel">
-        @{
 
+        @{
             for (int i = 0; i < Model.CarouselPlayers.Count; i++)
             {
-                <button class="card-button" asp-route-player="@i" asp-route-method="addplayer">
+                <button class="card-button" asp-route-player="@Model.CarouselPlayers[i].Id" asp-route-method="addplayer">
                     <div class="player-card">
                         <div class="player-card-main">
                             <div class="player-name">
@@ -74,7 +147,7 @@
                                 <label class="stat-name sub-text">Punkte</label>
                             </div>
                             <div class="stat-box">
-                                <label class="stat-value">15</label>
+                                <label class="stat-value">@Model.CarouselPlayers[i].Einsaetze</label>
                                 <label class="stat-name sub-text">Einsätze</label>
                             </div>
                             <div class="stat-box">
@@ -86,7 +159,7 @@
                                 <label class="stat-name sub-text">Karten</label>
                             </div>
                             <div class="stat-box">
-                                <label class="stat-value">8</label>
+                                <label class="stat-value">@Model.CarouselPlayers[i].Tore</label>
                                 <label class="stat-name sub-text">Tore</label>
                             </div>
                             <div class="stat-box">
@@ -99,7 +172,7 @@
                             <label class="points sub-text">Punkte</label>
                         </div>
                         <div class="player-card-value">
-                            <label class="player-value">€35.745.491</label>
+                            <label class="player-value">@Model.CarouselPlayers[i].Marktwert</label>
                             <label class="marketvalue sub-text">Marktwert</label>
                         </div>
                     </div>
@@ -110,5 +183,5 @@
         }
 
     </div>
-    
+
 </form>

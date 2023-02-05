@@ -1,0 +1,20 @@
+﻿@page
+@model BCandSC_CSharp.Pages.MatchdayModel
+@{
+    ViewData["Title"] = "Willkommen zu Spieltag " + Model.Matchday;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="TeamName"></label>
+        <input asp-for="TeamName" class="form-control" />
+    </div>
+    <div class="form-group">
+
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Spieltag starten" class="btn btn-primary" />
+    </div>
+</form>

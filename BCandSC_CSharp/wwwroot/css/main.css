@@ -17,12 +17,31 @@ label{
     display: flex;
     gap: 10px;
     top: 450px;
+    width: 600px;
+    overflow-x: scroll;
 }
 
 .field-player-button {
     background: url(../img/circle.svg) center center no-repeat;
     height: 50px;
     border: none;
+}
+
+.field-player:hover > .remove-player-button{
+    display: inline-block;
+}
+
+.remove-player-button{
+    display: none;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    left: -10px;
+}
+
+.field-player{
+    position: relative;
 }
 
 .player-card {
@@ -105,8 +124,8 @@ label{
 .field{
     margin-top: 20px;
     position: relative;
-    height: 400px;
-    width: 290px;
+    height: 650px;
+    width: 460px;
     background: url(../img/field.jpg) center center no-repeat;
     background-size: cover;
     border: 1px solid black;
@@ -121,6 +140,7 @@ label{
 }
 
 .field-players{
+    height: 670px;
     padding: 20px 0;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
