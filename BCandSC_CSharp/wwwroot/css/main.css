@@ -2,14 +2,34 @@
     --test: 1;
 }
 
-body{
-    display: grid;
-    justify-content: center;
+.navbar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
+
+.container {
+    width: 100%;
+    margin-top: 50px;
+    
+}
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    color: #fff;
+    background-color: #000000d1;
+    
+    
+}
+
 
 label{
     text-align: center;
-    font-weight: bold;
+    
 }
 
 .player-carousel{
@@ -22,9 +42,10 @@ label{
 }
 
 .field-player-button {
-    background: url(../img/circle.svg) center center no-repeat;
     height: 50px;
     border: none;
+    margin: 0px;
+    background: url(../img/icons8-plus-50.png) center center no-repeat;
 }
 
 .player-card {
@@ -260,4 +281,48 @@ label{
 }
 .f532 > .field-player:nth-child(10){
     grid-area: d5;
+}
+
+
+
+/*-------------------------------------CSS Matchday-------------------------------------*/
+
+p {
+    margin-top: 40px;
+    margin-bottom: 1rem;
+    padding: 20px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition-duration: 0.15s, 0.15s;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.pb-3, .py-3 {
+    padding-bottom: 1rem !important;
+    margin: 20;
+    margin: 20px;
+}
+
+
+
+
+.modeOneOne {
+    display: block;
+    margin: 0 auto;
 }

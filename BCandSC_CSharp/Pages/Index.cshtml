@@ -1,9 +1,98 @@
 ﻿@page
 @model LoginModel
+
 @{
     ViewData["Title"] = "Login";
 }
 
+
+
+<style>
+
+   
+
+
+    .container, .container-sm {
+        max-width: 540px;
+        width: 100%;
+        padding: 15px;
+        margin: auto;
+        margin-top: auto;
+        margin-top: 135px;
+    }
+   
+
+
+    .pb-3 {
+        padding-bottom: 1rem !important;
+        font-family: 'Montserrat', sans-serif;
+        text-align: center;
+        width: 418px;
+        margin-top: 100px;
+        margin-inline: auto;
+        padding: 33px;
+        padding-bottom: 33px;
+        border-radius: 10px;
+        border-color: white;
+        border-width: 1px;
+        border-style: solid;
+        background-color: #212529d4;
+        color: white;
+        margin-top: auto;
+    }
+
+    label {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    label {
+        text-align: center;
+     
+    }
+
+    .h2, h2 {
+        font-size: 30px;
+        font-weight: 250;
+        margin-bottom: 20px;
+    }
+
+    .btn-Login {
+        -webkit-appearance: button;
+        width: 350px;
+        color: white;
+        background-color: #ffffff00;
+        border-radius: 2.3rm;
+        border-radius: 4px;
+        border-color: white;
+        border-width: 1px;
+        border-style: solid;
+        margin-top: 30px;
+    }
+
+    .btn-Signup {
+        -webkit-appearance: button;
+        width: 350px;
+        color: white;
+        background-color: #ffffff00;
+        border-radius: 2.3rm;
+        border-radius: 4px;
+        border-color: white;
+        border-width: 1px;
+        border-style: solid;
+        margin-bottom: 40px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+
+  
+
+</style>
+
+
+
+@*<h1>TEAMBET</h1>*@
 <h2>@ViewData["Title"]</h2>
 
 <form method="post">
@@ -17,7 +106,7 @@
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="Log in" asp-page-handler="Login" class="btn btn-primary" />
-        <input type="submit" value="Sign Up" asp-page-handler="SignUp" class="btn btn-primary" />
+        <input type="submit" value="Log in" asp-page-handler="Login" class="btn btn-Login" />
+        <input type="submit" value="Sign Up" asp-page-handler="SignUp" class="btn btn-Signup" />
     </div>
 </form>
