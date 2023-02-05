@@ -92,6 +92,12 @@ namespace BCandSC_CSharp
         {
             return _bettingService.GetPlayerCountQueryAsync().Result;
         }
+        
+        public decimal GetAccountBalance(string accountAddress)
+        {
+            var weiBalance = _web3.Eth.GetBalance.SendRequestAsync(accountAddress).Result;
+            return Web3.Convert.FromWei(weiBalance);
+        }
 
 
         async Task Demo()
