@@ -23,6 +23,8 @@ namespace BCandSC_CSharp.Pages
 
         public IActionResult OnGet()
         {
+            TempData.Clear();
+
             if (Request.Query.ContainsKey("user"))
                 UserId = Convert.ToInt32(Request.Query["user"].ToString());
 
