@@ -34,13 +34,32 @@ namespace BCandSC_CSharp.Pages
 
         public IActionResult OnPost()
         {
+
+            //fï¿½r test
+            //BlockchainInterface abi = new BlockchainInterface();
+            Gamelogic gamelogic = new Gamelogic(1);
+
+            User user =new User();
+            user.Id = 1;
+            user.Name = "nic";
+            
+                  
+
+            gamelogic.AddUser(user);
+            gamelogic.GetResultsForMatch();
+
+
+            //BlockchainAPI.GetETHValueFromApi();
+
+
+
             getValues();
 
             //Spielerauswahl anzeigen
             if (Request.Query["method"] == "showcarousel")
                 ShowCarousel(Enum.Parse<Player.PlayerPosition>(Request.Query["addtype"]));
 
-            //Ausgewählten Spieler dem Team hinzufügen
+            //Ausgewï¿½hlten Spieler dem Team hinzufï¿½gen
             if (Request.Query["method"] == "addplayer")
                 AddPlayerToTeam();
 
@@ -48,7 +67,7 @@ namespace BCandSC_CSharp.Pages
             if (Request.Query["method"] == "removeplayer")
                 RemovePlayerFromTeam();
 
-            //Team erstellen noch auf Testbasis (Wo kommt matchday her? Teamname Eingabe hinzufügen)
+            //Team erstellen noch auf Testbasis (Wo kommt matchday her? Teamname Eingabe hinzufï¿½gen)
             if (Request.Query["method"] == "done")
                 return RedirectToPage("/Result", new { userId = UserId });
 
