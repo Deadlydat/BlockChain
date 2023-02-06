@@ -19,6 +19,8 @@ namespace BCandSC_CSharp.Pages
         public Player player { get; set; } = new();
         public List<Player.PlayerPosition> FormationList { get; set; } = new();
         public List<Player> CarouselPlayers { get; set; } = new();
+        [BindProperty]
+        public int BetAmount { get; set; } = 0;
 
 
         public IActionResult OnGet()
