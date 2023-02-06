@@ -13,13 +13,13 @@ namespace BCandSC_CSharp.Pages
     public class PlayerSelectionModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
-        public int UserId { get; set; } = -1;     
+        public int UserId { get; set; } = -1;
         public Enviroment enviroment = new();
         public Team team { get; set; } = new();
         public Player player { get; set; } = new();
         public List<Player.PlayerPosition> FormationList { get; set; } = new();
         public List<Player> CarouselPlayers { get; set; } = new();
-             
+
 
         public IActionResult OnGet()
         {
@@ -37,16 +37,7 @@ namespace BCandSC_CSharp.Pages
 
             //f�r test
             //BlockchainInterface abi = new BlockchainInterface();
-            //Gamelogic gamelogic = new Gamelogic(1);
 
-            //User user =new User();
-            //user.Id = 1;
-            //user.Name = "nic";
-            
-                  
-
-            //gamelogic.AddUser(user);
-            //gamelogic.GetResultsForMatch();
 
 
             //BlockchainAPI.GetETHValueFromApi();
@@ -69,7 +60,18 @@ namespace BCandSC_CSharp.Pages
 
             //Team erstellen noch auf Testbasis (Wo kommt matchday her? Teamname Eingabe hinzuf�gen)
             if (Request.Query["method"] == "done")
-                return RedirectToPage("/Result", new { userId = UserId });
+            {
+                Gamelogic gamelogic = new Gamelogic(enviroment.Matchday);
+                User user = new User();
+                user = user.GetUser(UserId);
+                gamelogic.AddUser(user);
+
+                BlockchainInterface blockchainInterface = new BlockchainInterface();
+               
+
+                //smartcontract bet
+                return RedirectToPage("/Matchday", new { userId = UserId });
+            }
 
             setValues();
 
@@ -77,7 +79,7 @@ namespace BCandSC_CSharp.Pages
         }
 
         public void getValues()
-        {            
+        {
             enviroment = Enviroment.GetEnviroment();
 
             if (TempData["userid"] != null)
@@ -105,7 +107,7 @@ namespace BCandSC_CSharp.Pages
 
         public void RemovePlayerFromTeam()
         {
-            player.RemovePlayerFromTeam(Convert.ToInt32(Request.Query["player"]), team.Id);          
+            player.RemovePlayerFromTeam(Convert.ToInt32(Request.Query["player"]), team.Id);
         }
 
         public void AddPlayerToTeam()

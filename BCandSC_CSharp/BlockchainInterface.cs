@@ -32,7 +32,7 @@ namespace BCandSC_CSharp
             _account = new Account(PrivateKey);
             _web3 = new Web3(_account, Url);
             _bettingService = new BettingService(_web3, ContractAddress);
-            Demo().Wait();
+            //Demo().Wait();
         }
 
         //public static void Main()
