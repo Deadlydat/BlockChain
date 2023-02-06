@@ -15,7 +15,7 @@ namespace BCandSC_CSharp
 {
     public class BlockchainInterface
     {
-        private const string Url = "https://rpc.goerli.mudit.blog";
+        private const string Url = "https://rpc.ankr.com/eth_goerli";
         // this is the private key of the contract owner
         private const string PrivateKey = "0xc815fa507181842ea2c85b12d75dc162b633d1c69d87e351bb86406f3db5b72f";
         private const string ContractAddress = "0xE1D9739D0CF03fC0396892ba682ed1E6d008C730";
@@ -131,12 +131,29 @@ namespace BCandSC_CSharp
                 Console.WriteLine(GetMoneyPool());
                 Console.WriteLine("Player count:");
                 Console.WriteLine(GetPlayerCount());
-                Console.WriteLine("Distribute Prices:");
-                Console.WriteLine(DistributePrices("BEBE", PrivateKey));
+
+                Console.WriteLine("GetBalance");
+                Console.WriteLine(GetAccountBalance("0xa145E3bCe112EB732aeeBefa3Cc2C9Ad82275B0C"));
+
+
+                Console.WriteLine("First Bet...");
+                Console.WriteLine(Bet("HAHA", "0x6ddb585187ab98da4515f1618bcd49327d7ae76b60aa832bc39a3e14c86a374a"));
+                
+
                 Console.WriteLine("MoneyPool:");
                 Console.WriteLine(GetMoneyPool());
                 Console.WriteLine("Player count:");
                 Console.WriteLine(GetPlayerCount());
+                Console.WriteLine("GetBalance");
+                Console.WriteLine(GetAccountBalance("0xa145E3bCe112EB732aeeBefa3Cc2C9Ad82275B0C"));
+
+
+                //Console.WriteLine("Distribute Prices:");
+                //Console.WriteLine(DistributePrices("BEBE", PrivateKey));
+                //Console.WriteLine("MoneyPool:");
+                //Console.WriteLine(GetMoneyPool());
+                //Console.WriteLine("Player count:");
+                //Console.WriteLine(GetPlayerCount());
             }
             catch (Exception ex)
             {

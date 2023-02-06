@@ -36,7 +36,17 @@ namespace BCandSC_CSharp.Pages
         {
 
             //f�r test
-            BlockchainInterface abi = new BlockchainInterface();
+            //BlockchainInterface abi = new BlockchainInterface();
+            Gamelogic gamelogic = new Gamelogic(1);
+
+            User user =new User();
+            user.Id = 1;
+            user.Name = "nic";
+            
+                  
+
+            gamelogic.AddUser(user);
+            gamelogic.GetResultsForMatch();
 
 
             //BlockchainAPI.GetETHValueFromApi();
