@@ -51,6 +51,42 @@ namespace BCandSC_CSharp
             return user;
         }
 
+        public User GetUser(int userId)
+        {
+            User user = new();
+            Database db = new();
+
+            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE (user_id = @user_id)");
+            SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
+
+            command.Parameters.Add(param1);
+
+            db.conn.Open();
+            command.Connection = db.conn;
+
+            try
+            {
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read() == true)
+                {
+                    user.Id = reader.GetInt32("user_id");
+                    user.Name = reader.GetString("name");
+                    user.ContactAddress = reader.GetString("contract_address");
+                    user.PrivateKey = reader.GetString("private_key");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
+
+            return user;
+        }
+
         public User SetUser(string name, string password)
         {
             User user = new();

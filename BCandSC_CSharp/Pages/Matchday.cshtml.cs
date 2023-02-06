@@ -8,9 +8,6 @@ namespace BCandSC_CSharp.Pages
 {
     public class MatchdayModel : PageModel
     {
-        [Required]
-        [BindProperty]
-        public string TeamName { get; set; } = "";
         [BindProperty(SupportsGet = true)]
         public int userId { get; set; }
         public int Matchday { get; set; } = 0;
@@ -36,10 +33,11 @@ namespace BCandSC_CSharp.Pages
 
         public IActionResult OnPost()
         {
-            if (TeamName != null && TeamName.Length > 2)
-                team.CreateTeam(userId, TeamName, Enviroment.GetEnviroment().Matchday);
-            else
-                return RedirectToPage("/Matchday", new { userId = userId });
+            User u = new();
+            u = u.GetUser(userId);
+
+            team.CreateTeam(userId, $"Team {u.Name} für Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
+
 
             return RedirectToPage("/Formation", new { userId = userId });
         }
