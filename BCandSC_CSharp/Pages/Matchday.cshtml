@@ -13,11 +13,11 @@
     <style>
 
         /*    p {
-                                                            margin-top: 40px;
-                                                            margin-bottom: 1rem;
-                                                            padding: 20px;
-                                                        }
-                                                */
+                                                                                    margin-top: 40px;
+                                                                                    margin-bottom: 1rem;
+                                                                                    padding: 20px;
+                                                                                }
+                                                                        */
         .container {
             background-color: #262626;
             width: 100%;
@@ -25,31 +25,31 @@
         }
 
         /*      .form-control {
-                                                            display: block;
-                                                            width: 100%;
-                                                            padding: .375rem .75rem;
-                                                            font-size: 1rem;
-                                                            line-height: 1.5;
-                                                            color: #495057;
-                                                            background-color: #fff;
-                                                            background-clip: padding-box;
-                                                            border: 1px solid #ced4da;
-                                                            border-radius: .25rem;
-                                                            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-                                                            transition-duration: 0.15s, 0.15s;
-                                                        }*/
+                                                                                    display: block;
+                                                                                    width: 100%;
+                                                                                    padding: .375rem .75rem;
+                                                                                    font-size: 1rem;
+                                                                                    line-height: 1.5;
+                                                                                    color: #495057;
+                                                                                    background-color: #fff;
+                                                                                    background-clip: padding-box;
+                                                                                    border: 1px solid #ced4da;
+                                                                                    border-radius: .25rem;
+                                                                                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                                                                                    transition-duration: 0.15s, 0.15s;
+                                                                                }*/
         /*
-                                                        .form-group {
-                                                            margin-bottom: 1rem;
-                                                            text-align: center;
-                                                        }
+                                                                                .form-group {
+                                                                                    margin-bottom: 1rem;
+                                                                                    text-align: center;
+                                                                                }
 
-                                                        .pb-3, .py-3 {
-                                                            padding-bottom: 1rem !important;
-                                                            margin: 20;
-                                                            margin: 20px;
-                                                        }
-                                                */
+                                                                                .pb-3, .py-3 {
+                                                                                    padding-bottom: 1rem !important;
+                                                                                    margin: 20;
+                                                                                    margin: 20px;
+                                                                                }
+                                                                        */
         label {
             text-align: center;
             font-weight: 250;
@@ -146,10 +146,10 @@
             }
 
         /*   .modeOneOne {
-                                                            display: block;
-                                                            margin: 0 auto;
-                                                        }
-                                                */
+                                                                                    display: block;
+                                                                                    margin: 0 auto;
+                                                                                }
+                                                                        */
 
     </style>
 
@@ -168,7 +168,7 @@
                     <a class="nav-item nav-link" href="#">Features</a>
                     <a class="nav-item nav-link" href="#">Pricing</a>
                     <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                    
+
                 </div>
             </div>
         </nav>
@@ -180,22 +180,30 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Teamname</h5>
-                        <form method="post">
-                            <div class="form-group">
-                                
-                            </div>
-                            <div class="form-group">
-                            </div>
-                            <div class="form-group">
-                            </div>
-                        </form>
-                    </div>
 
-
-                </div>
+                @{
+                    foreach (Team t in Model.teams)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">@t.Name</h5>
+                                <div class="form-group">
+                                    <label>Punkte: @t.TotalPoints</label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ergebnis: -10000€</label>
+                                </div>
+                                <div class="form-group">
+                                    @{
+                                        foreach(Player p in t.Players){
+                                            <label>@p.Name</label>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
             </div>
 
             <div class="col-sm-6" style="display: grid; align-items: center;">

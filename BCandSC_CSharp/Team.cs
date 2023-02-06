@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
+using System.Reflection.PortableExecutable;
 
 namespace BCandSC_CSharp
 {
@@ -56,6 +57,57 @@ namespace BCandSC_CSharp
             {
                 db.conn.Close();
             }
+        }
+
+        public List<Team> GetTeamList(int userid)
+        {
+            List<Team> list = new List<Team>();
+            Database db = new();            
+            SqlCommand command = new SqlCommand("SELECT * FROM UserMatchdayPoints WHERE (user_id = @user_id)");
+            command.Parameters.Add(new SqlParameter { ParameterName = "@user_id", Value = userid, SqlDbType = SqlDbType.Int });
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Team team = new();
+                team.Id = reader.GetInt32("team_id");
+                team.Name = reader.GetString("name");
+                team.TotalPoints = reader.GetInt32("TotalPoints");
+                team.Players = GetPlayersForTeam(team.Id);
+                list.Add(team);
+            }
+            reader.Close();
+            db.conn.Close();
+
+            return list;
+        }
+
+        public List<Player> GetPlayersForTeam(int teamId)
+        {
+            List<Player> list = new List<Player>();
+            Database db = new();
+            SqlCommand command = new SqlCommand("SELECT * FROM PlayerTeam WHERE (team_id = @team_id)");
+            command.Parameters.Add(new SqlParameter { ParameterName = "@team_id", Value = teamId, SqlDbType = SqlDbType.Int });
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            Player p = new();
+            while (reader.Read())
+            {
+                list.Add(p.GetPlayer(reader.GetInt32("player_id")));
+            }
+
+            list = list.OrderBy(x => x.Position).ToList();
+
+            reader.Close();
+            db.conn.Close();
+
+            return list;
         }
 
         public Team GetTeam(int userid, int matchday, bool withPoints = false)
