@@ -45,7 +45,7 @@ namespace BCandSC_CSharp.Pages
           // return RedirectToPage("/Formation", new { userId = 2 });
 
             // return RedirectToPage("/Result", new { userId = 1 });
-            //return RedirectToPage("/Matchday", new { userId = 6 });
+            //return RedirectToPage("/Simulation");
               return Page();
         }
 
