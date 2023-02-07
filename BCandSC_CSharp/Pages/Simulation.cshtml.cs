@@ -57,15 +57,15 @@ namespace BCandSC_CSharp.Pages
 
             if (Request.Query["method"] == "money")
             {
-               MoneyConversion.DataObject data =  MoneyConversion.GetETHValueFromApi().Result;
-                Console.WriteLine(data.USD +" "+ data.EUR);
+                //MoneyConversion.DataObject data = MoneyConversion.GetETHValueFromApi().Result;
+                //Console.WriteLine(data.USD + " " + data.EUR);
 
-                User user= new User();
-                user = user.GetUser(45);
+                //User user = new User();
+                //user = user.GetUser(45);
 
-                MoneyConversion.DataObject data2 = MoneyConversion.GetAccountBalanceInFiatMoney(user);
-                Console.WriteLine(data2.USD +" "+ data2.EUR);
-                    
+                //MoneyConversion.DataObject data2 = MoneyConversion.GetAccountBalanceInFiatMoney(user);
+                //Console.WriteLine(data2.USD + " " + data2.EUR);
+
             }
 
 

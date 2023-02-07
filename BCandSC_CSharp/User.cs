@@ -52,6 +52,69 @@ namespace BCandSC_CSharp
 
             return user;
         }
+        public void SetUserBalance(int userId, float balance)
+        {
+            Database db = new();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO User (balance) VALUES @balance WHERE user_id = @user_id");
+                SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
+                SqlParameter param2 = new SqlParameter { ParameterName = "@balance", Value = balance, SqlDbType = SqlDbType.Float };
+
+
+                command.Parameters.Add(param1);
+                command.Parameters.Add(param2);
+
+                db.conn.Open();
+                command.Connection = db.conn;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
+        }
+
+        public double GetUserBalance(int userId)
+        {
+            double result = 0.0;
+            Database db = new();
+
+            SqlCommand command = new SqlCommand("SELECT * FROM User WHERE ([user_id] = @user_id)");
+            SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
+
+
+
+            command.Parameters.Add(param1);
+
+
+            db.conn.Open();
+            command.Connection = db.conn;
+
+            try
+            {
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read() == true)
+                {
+                    result = (double)reader.GetFloat("balance");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
+
+            return result;
+        }
+
 
         public int GetUserTransaction(int userId, int matchday)
         {

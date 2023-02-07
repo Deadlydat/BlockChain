@@ -76,10 +76,9 @@ namespace BCandSC_CSharp
 
             while (reader.Read() == true)
             {
-                if (reader.GetInt32("done") == 1)
-                {
-                    done = true;
-                }
+
+                done = reader.GetBoolean("done");
+
             }
             reader.Close();
             db.conn.Close();

@@ -45,7 +45,7 @@ namespace BCandSC_CSharp
 
 
 
-        public static DataObject TurnAccountBalanceInFiatMoney( double balance)
+        public static DataObject TurnAccountBalanceInFiatMoney( decimal balance)
         {
             DataObject dataObject = new DataObject();
             DataObject data = GetETHValueFromApi().Result;
@@ -54,8 +54,8 @@ namespace BCandSC_CSharp
 
             //double balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
 
-            dataObject.USD = Math.Round(balance * data.USD, 2);
-            dataObject.EUR = Math.Round(balance * data.EUR, 2);
+            dataObject.USD = Math.Round(Decimal.ToDouble(balance) * data.USD, 2);
+            dataObject.EUR = Math.Round(Decimal.ToDouble(balance) * data.EUR, 2);
 
             return dataObject;
         }

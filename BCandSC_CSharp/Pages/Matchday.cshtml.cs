@@ -43,15 +43,38 @@ namespace BCandSC_CSharp.Pages
 
 
 
+            Gamelogic gamelogic = new Gamelogic(Matchday);
+
+            BlockchainInterface blockchainInterface = new();
+            //To Do casts reduzieren
+            if (gamelogic.CheckCurrentMatchday())
+            {
+                decimal balance = blockchainInterface.GetAccountBalance(user.Address);
+
+                MoneyConversion.DataObject data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
+
+                AccountBalanceETH = Decimal.ToDouble(balance);
+                AccountBalanceEUR = data.EUR;
+                AccountBalanceUSD = data.USD;
+
+                user.SetUserBalance(userId, (float)balance);
 
 
 
-            //MoneyConversion.DataObject data = MoneyConversion.GetAccountBalanceInFiatMoney(user);
-            //BlockchainInterface blockchainInterface = new();
+            }
+            else
+            {
 
-            //AccountBalanceEUR = data.EUR;
-            //AccountBalanceUSD = data.USD;
-            //AccountBalanceETH = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+                double oldBalance = user.GetUserBalance(userId);
+                double newBalance = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+                double transaction = oldBalance - newBalance;
+
+                user.SetUserTransaction(userId, Matchday, (int) transaction); 
+
+
+
+            }
+
 
 
 
