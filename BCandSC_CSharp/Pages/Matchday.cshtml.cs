@@ -21,14 +21,14 @@ namespace BCandSC_CSharp.Pages
             Matchday = Enviroment.GetEnviroment().Matchday;
             Team t = team.GetTeam(userId, Matchday);
 
-            if (t.Players.Count == 11)
-                return RedirectToPage("/Result", new { userId = userId });
+            //if (t.Players.Count == 11)
+            //    return RedirectToPage("/Result", new { userId = userId });
 
-            if (t.Formation != "")
-                return RedirectToPage("/PlayerSelection", new { UserId = userId });
+            //if (t.Formation != "")
+            //    return RedirectToPage("/PlayerSelection", new { UserId = userId });
 
-            if (t.Id > 0)
-                return RedirectToPage("/Formation", new { userId = userId });
+            //if (t.Id > 0)
+            //    return RedirectToPage("/Formation", new { userId = userId });
 
 
             teams = t.GetTeamList(userId);
