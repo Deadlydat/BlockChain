@@ -12,6 +12,7 @@ namespace BCandSC_CSharp.Pages
         public int userId { get; set; }
         public int Matchday { get; set; } = 0;
         Team team { get; set; } = new();
+        public List<Team> teams { get; set; } = new();
 
 
         public IActionResult OnGet()
@@ -27,6 +28,9 @@ namespace BCandSC_CSharp.Pages
 
             if (t.Id > 0)
                 return RedirectToPage("/Formation", new { userId = userId });
+
+
+            teams = t.GetTeamList(userId);
 
             return Page();
         }
