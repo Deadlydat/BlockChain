@@ -23,6 +23,14 @@ namespace BCandSC_CSharp.Pages
             Matchday = Enviroment.GetEnviroment().Matchday;
             Team t = team.GetTeam(userId, Matchday);
 
+            //if (t.Players.Count == 11)
+            //    return RedirectToPage("/Result", new { userId = userId });
+
+            //if (t.Formation != "")
+            //    return RedirectToPage("/PlayerSelection", new { UserId = userId });
+
+            //if (t.Id > 0)
+            //    return RedirectToPage("/Formation", new { userId = userId });
             if (t.Formation != "" && t.Done == false)
                 return RedirectToPage("/PlayerSelection", new { UserId = userId });
 
@@ -55,7 +63,7 @@ namespace BCandSC_CSharp.Pages
             User u = new();
             u = u.GetUser(userId);
 
-            team.CreateTeam(userId, $"Team {u.Name} für Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
+            team.CreateTeam(userId, $"Team {u.Name} fï¿½r Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
 
 
             return RedirectToPage("/Formation", new { userId = userId });
