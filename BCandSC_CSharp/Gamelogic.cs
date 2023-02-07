@@ -12,7 +12,6 @@ namespace BCandSC_CSharp
         private int matchDay;
         public Gamelogic(int matchDay)
         {
-
             this.matchDay = matchDay;
         }
 
@@ -51,6 +50,44 @@ namespace BCandSC_CSharp
 
             return PointsForTeam;
         }
+
+
+
+
+
+        private bool CheckCurrentMatchday()
+        {
+            bool done = false;
+            Database db = new();
+
+            SqlCommand command = new SqlCommand("SELECT done FROM UserMatchdayPoints WHERE matchday=@matchday");
+
+            SqlParameter param = new SqlParameter
+            {
+                ParameterName = "@matchDay",
+                Value = matchDay,
+                SqlDbType = SqlDbType.Int
+            };
+            command.Parameters.Add(param);
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read() == true)
+            {
+                if (reader.GetInt32("done") == 1)
+                {
+                    done = true;
+                }
+            }
+            reader.Close();
+            db.conn.Close();
+
+            return done;
+        }
+
+
 
 
         public Team GetResultsForMatch()

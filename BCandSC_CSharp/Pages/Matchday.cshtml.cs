@@ -34,6 +34,10 @@ namespace BCandSC_CSharp.Pages
             user = user.GetUser(userId);
 
 
+
+
+
+
             MoneyConversion.DataObject data = MoneyConversion.GetAccountBalanceInFiatMoney(user);
             BlockchainInterface blockchainInterface = new();
 
