@@ -8,8 +8,8 @@ namespace BCandSC_CSharp.Pages
 
         Gamelogic gamelogic;
         BlockchainInterface BlockchainInterface;
-        private String adminKey = "";
-        
+        private String adminKey = "0xc815fa507181842ea2c85b12d75dc162b633d1c69d87e351bb86406f3db5b72f";
+
 
         public IActionResult OnGet()
         {
@@ -24,30 +24,34 @@ namespace BCandSC_CSharp.Pages
             {
                 gamelogic = new Gamelogic(Enviroment.GetEnviroment().Matchday);
                 BlockchainInterface = new BlockchainInterface();
+                Console.WriteLine("started Matchday now you can bet");
 
             }
 
             if (Request.Query["method"] == "startgame")
             {
-                gamelogic.UsersId = gamelogic.GetUsersForMatchDay();
+                //gamelogic.UsersId = gamelogic.GetUsersForMatchDay();
                 BlockchainInterface.StartGame(adminKey);
-                //Start Methode im Smartcontract, um Wetten und Teamcreation freizuschalten
+                Console.WriteLine("started game betting is closed");
+
             }
             if (Request.Query["method"] == "endgame")
             {
                 BlockchainInterface.FinishGame(adminKey);
+                Console.WriteLine("finished game");
 
-                //Preise verteilen
+
             }
 
             if (Request.Query["method"] == "endmatchday")
             {
-                gamelogic.GetResultsForMatch();
-                //BlockchainInterface.DistributePrices()
+                Team winnerTeam = gamelogic.GetResultsForMatch();
+                BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
+                Console.WriteLine("winner team "+winnerTeam.Name+" end machtday");
 
-                    //matchday +1
+                //matchday +1
 
-                //Start Methode im Smartcontract, um Wetten und Teamcreation freizuschalten
+
             }
 
 

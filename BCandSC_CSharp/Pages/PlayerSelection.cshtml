@@ -125,7 +125,7 @@
             color: white;
             border-radius: 10px;
             text-align: center;
-            margin: auto;
+            margin-top: 40px;
             margin-bottom: auto;
             margin-bottom: 20px;
         }
@@ -151,7 +151,8 @@
             font-size: 16px;
             font-weight: 400;
         }
-    </style>
+
+        .test</style>
 
     <body>
 
@@ -362,13 +363,18 @@
                 </div>
 
             </div>
+            <div>
 
-            @{
-                if (Model.team.Players.Count == 11)
-                {
-                    <input type="submit" value="Test" asp-route-method="done" class="btn btn-primary" />
+
+
+                @{
+                    if (Model.team.Players.Count == 11)
+                    {
+                        <input type="submit" value="Test" asp-route-method="done" class="btn btn-primary" />
+                    }
                 }
-            }
+
+            </div>
 
 
         </form>

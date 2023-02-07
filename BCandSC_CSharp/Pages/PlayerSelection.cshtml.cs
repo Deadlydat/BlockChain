@@ -64,17 +64,15 @@ namespace BCandSC_CSharp.Pages
             //Team erstellen noch auf Testbasis (Wo kommt matchday her? Teamname Eingabe hinzuf�gen)
             if (Request.Query["method"] == "done")
             {
-                Gamelogic.SetUserToUserMatchDayList(UserId, enviroment.Matchday);
+                //Gamelogic.SetUserToUserMatchDayList(UserId, enviroment.Matchday);
 
                 User user = new User();
                 user = user.GetUser(UserId);
 
-
                 BlockchainInterface blockchainInterface = new BlockchainInterface();
                 blockchainInterface.Bet(team.Name, user.PrivateKey);
 
-
-                //smartcontract bet
+           
                 return RedirectToPage("/Matchday", new { userId = UserId });
             }
 

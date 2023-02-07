@@ -1,6 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
 using static BCandSC_CSharp.Player;
+using System.Text.RegularExpressions;
 
 namespace BCandSC_CSharp
 {
@@ -8,7 +9,7 @@ namespace BCandSC_CSharp
     {
         public int Id { get; set; } = -1;
         public string Name { get; set; } = "";
-        public string ContactAddress { get; set; } = "";
+        public string Address { get; set; } = "";
         public string PrivateKey { get; set; } = "";
 
 
@@ -20,11 +21,11 @@ namespace BCandSC_CSharp
             SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE ([name] = @name) AND ([password] = @password)");
             SqlParameter param1 = new SqlParameter { ParameterName = "@name", Value = name, SqlDbType = SqlDbType.NVarChar, Size = 30 };
             SqlParameter param2 = new SqlParameter { ParameterName = "@password", Value = password, SqlDbType = SqlDbType.NVarChar, Size = 50 };
-           
+
 
             command.Parameters.Add(param1);
             command.Parameters.Add(param2);
-          
+
             db.conn.Open();
             command.Connection = db.conn;
 
@@ -35,8 +36,8 @@ namespace BCandSC_CSharp
                 {
                     user.Id = reader.GetInt32("user_id");
                     user.Name = reader.GetString("name");
-                    user.ContactAddress=reader.GetString("contract_address");
-                    user.PrivateKey = reader.GetString("private_key");
+                    user.Address = RemoveWhitespace(reader.GetString("address"));
+                    user.PrivateKey = RemoveWhitespace(reader.GetString("private_key"));
                 }
             }
             catch (Exception e)
@@ -47,7 +48,7 @@ namespace BCandSC_CSharp
             {
                 db.conn.Close();
             }
-           
+
             return user;
         }
 
@@ -71,8 +72,8 @@ namespace BCandSC_CSharp
                 {
                     user.Id = reader.GetInt32("user_id");
                     user.Name = reader.GetString("name");
-                    user.ContactAddress = reader.GetString("contract_address");
-                    user.PrivateKey = reader.GetString("private_key");
+                    user.Address = RemoveWhitespace(reader.GetString("address"));
+                    user.PrivateKey = RemoveWhitespace(reader.GetString("private_key"));
                 }
             }
             catch (Exception e)
@@ -116,6 +117,14 @@ namespace BCandSC_CSharp
 
             return user;
         }
+
+        private static string RemoveWhitespace(string input)
+        {
+            return Regex.Replace(input, @"\s+", "");
+        }
+
+
+
     }
 
 }
