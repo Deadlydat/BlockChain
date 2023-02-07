@@ -2,6 +2,7 @@
 using System.Data;
 using static BCandSC_CSharp.Player;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace BCandSC_CSharp
 {
@@ -50,6 +51,69 @@ namespace BCandSC_CSharp
             }
 
             return user;
+        }
+
+        public int GetUserTransaction(int userId, int matchday)
+        {
+            int result = 0;
+            Database db = new();
+
+            SqlCommand command = new SqlCommand("SELECT * FROM [UserTransaction] WHERE ([user_id] = @user_id) AND ([matchday] = @matchday)");
+            SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
+            SqlParameter param2 = new SqlParameter { ParameterName = "@matchday", Value = matchday, SqlDbType = SqlDbType.Int };
+
+
+            command.Parameters.Add(param1);
+            command.Parameters.Add(param2);
+
+            db.conn.Open();
+            command.Connection = db.conn;
+
+            try
+            {
+                using SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read() == true)
+                {
+                    result = reader.GetInt32("amount");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
+
+            return result;
+        }
+
+        public void SetUserTransaction(int userId, int matchday, int transactionValue)
+        {
+            Database db = new();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO [UserTransaction] ([user_id], [matchday], amount) VALUES (@user_id, @matchday, @amount)");
+                SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
+                SqlParameter param2 = new SqlParameter { ParameterName = "@matchday", Value = matchday, SqlDbType = SqlDbType.Int };
+                SqlParameter param3 = new SqlParameter { ParameterName = "@amount", Value = transactionValue, SqlDbType = SqlDbType.Int };
+
+                command.Parameters.Add(param1);
+                command.Parameters.Add(param2);
+                command.Parameters.Add(param3);
+                db.conn.Open();
+                command.Connection = db.conn;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
         }
 
         public User GetUser(int userId)
