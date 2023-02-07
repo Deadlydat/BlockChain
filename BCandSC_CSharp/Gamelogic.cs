@@ -6,7 +6,7 @@ namespace BCandSC_CSharp
 {
     public class Gamelogic
     {
-        private List<User> Users = new List<User>();
+        public List<int> UsersId { get; set; } = new();
 
         private int matchDay;
         public Gamelogic(int matchDay)
@@ -15,10 +15,60 @@ namespace BCandSC_CSharp
             this.matchDay = matchDay;
         }
 
-        public void AddUser(User user)
+
+
+        public List<int> GetUsersForMatchDay()
         {
-            Users.Add(user);
+            List<int> usersID = new();
+            Database db = new();
+
+            SqlCommand command = new SqlCommand("SELECT TOP user_id FROM UserMatchdayList WHERE matchday=@matchday");
+
+            SqlParameter param = new SqlParameter
+            {
+                ParameterName = "@matchDay",
+                Value = matchDay,
+                SqlDbType = SqlDbType.Int
+            };
+            command.Parameters.Add(param);
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read() == true)
+            {
+                int userID = reader.GetInt32("user_id");
+
+
+                usersID.Add(userID);
+
+
+            }
+            reader.Close();
+            db.conn.Close();
+
+            return usersID;
         }
+
+
+        public static void SetUserToUserMatchDayList(int userId, int matchDay)
+        {
+            Database db = new();
+            SqlCommand command = new SqlCommand("INSERT INTO UserMatchdayList (matchday, user_id) VALUES (@matchday, @user_id)");
+            command.Parameters.Add(new SqlParameter { ParameterName = "@matchday", Value = matchDay, SqlDbType = SqlDbType.Int });
+            command.Parameters.Add(new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int });
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            command.ExecuteNonQuery();
+
+            db.conn.Close();
+        }
+
+
+
+
 
 
 
