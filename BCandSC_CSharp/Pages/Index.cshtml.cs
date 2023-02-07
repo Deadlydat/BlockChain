@@ -42,9 +42,9 @@ namespace BCandSC_CSharp.Pages
             //}
             //System.IO.File.WriteAllLines("C:/temp/sql.txt", strings);
             //Player p = new();
-          // return RedirectToPage("/Formation", new { userId = 2 });
+           //return RedirectToPage("/Formation", new { userId = 2 });
 
-            // return RedirectToPage("/Result", new { userId = 1 });
+             return RedirectToPage("/Matchday", new { userId = 14 });
             //return RedirectToPage("/Simulation");
               return Page();
         }

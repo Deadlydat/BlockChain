@@ -15,6 +15,21 @@
             text-align: center;
         }
 
+        body {
+            width: 100%;
+            background-size: cover;
+            height: 100%;
+            background-color: #343a40;
+        }
+
+        .container {
+            width: 100%;
+            background: url(../img/StationNEW.jpg) center center no-repeat;
+            background-size: cover;
+            height: 100%;
+        }
+
+
 
         .field-headline-text {
             font-family: 'Montserrat', sans-serif;
@@ -36,10 +51,15 @@
             align-items: center;
             background-color: white;
             margin: 10px;
-            max-width: 500px;
-            margin: auto;
+            width: 500px;
+            margin: 0;
             margin-bottom: 10px;
             border-radius: 5px;
+            margin-top: 80px;
+        }
+
+        html body div.container main.pb-3 form div.field-headline label.field-headline-coins {
+            text-align: left;
         }
 
         label {
@@ -58,17 +78,26 @@
         .field {
             margin-top: 20px;
             position: relative;
-            height: 390px;
+            height: 700px;
             width: 500px;
-            background: url(../img/fieldhalfright.jpg) center center no-repeat;
+            background: url(../img/FieldNEW.png) center center no-repeat;
             background-size: auto;
             background-size: cover;
             border: 1px solid white;
-            margin: auto;
             left: 0;
             right: 0;
             top: 0;
             bottom: 0;
+        }
+
+        .field-player-button {
+            height: 50px;
+            border: none;
+            margin: 0px;
+            margin-top: 0px;
+            background: url(../img/icons8-plus-50.png) center center no-repeat;
+            margin-top: 50px;
+            height: 75px;
         }
 
         .player-carousel {
@@ -79,6 +108,7 @@
             width: 100%;
             overflow-x: scroll;
             margin-bottom: 10px;
+            margin-top: 20px;
         }
 
         .card-button {
@@ -119,22 +149,25 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 40px;
-            width: 500px;
-            background-color: #343A40;
-            color: white;
+            height: 55px;
+            width: 100%;
+            background-color: white;
             border-radius: 10px;
             text-align: center;
-            margin-top: 40px;
-            margin-bottom: auto;
+            margin: auto;
             margin-bottom: 20px;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+            color: #a69f37;
         }
 
             .btn-primary:hover {
-                color: black;
-                text-decoration: auto;
+                color: #fff;
+                background-color: #3f8015;
+                border-color: white;
             }
-
 
         .player-card-stats label {
             font-size: 8px;
@@ -152,236 +185,286 @@
             font-weight: 400;
         }
 
-        .test</style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            color: #fff;
+        }
 
-    <body>
+        .bet {
+            margin-top: 80px;
+            display: flex;
+            justify-content: flex-end;
+            height: 30%;
+        }
 
-        <nav class="navbar navbar-dark bg-dark">
+        .bet-label {
+            font-size: 20px;
+            margin-right: 20px;
+            padding: 5px;
+            font-weight: 400;
+        }
 
-            <a class="navbar-brand" href="#">TEAMBET</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Features</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
+    </style>
+
+
+
+
+    <nav class="navbar navbar-dark bg-dark">
+
+        <a class="navbar-brand" href="#">TEAMBET</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
+        </div>
+    </nav>
+
+    <form method="post">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="field-headline">
+
+
+
+                    <label class="field-headline-coins">@Model.enviroment.Coins</label>&nbsp;
+                    <label class="field-headline-text">Coins verfügbar</label>
+
+
                 </div>
             </div>
-        </nav>
 
 
-        <p>
-            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 
-        </p>
-
-        <form method="post">
-
-            <div>
-                <label>Wettbetrag</label>
-                <input asp-for="BetAmount" />
+            <div class="col-sm-8">
+                <div class="bet">
+                    <label class="bet-label">Wettbetrag</label>
+                    <input asp-for="BetAmount"/>
+                </div>
             </div>
+        </div>
 
-            <div class="field-headline">
-                <label class="field-headline-coins">@Model.enviroment.Coins</label>&nbsp;
-                <label class="field-headline-text">Coins verfügbar</label>
-            </div>
 
-            <div class="player-carousel">
 
-                @{
-                    for (int i = 0; i < Model.CarouselPlayers.Count; i++)
-                    {
-                        <button class="card-button" asp-route-player="@Model.CarouselPlayers[i].Id" asp-route-method="addplayer">
-                            <div class="player-card">
-                                <div class="player-card-main">
-                                    <div class="player-name">
-                                        <label class="last-name">@Model.CarouselPlayers[i].Name</label>
+
+        <div class="row">
+            <div class="col-sm-4">
+
+
+                <div class="field">
+
+
+                    <div class="field-players @Model.team.Formation">
+
+                        @{
+                            string name = "";
+                            int id = 0;
+
+                            for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[3].ToString()); i++)
+                            {
+                                id = 0;
+                                name = "Name";
+                                if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).Count() > i)
+                                {
+                                    name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).ToList()[i]).Name;
+                                    id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).ToList()[i]).Id;
+                                }
+
+                                <div class="field-player">
+                                    <div class="field-player-picture">
+                                        <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Striker.ToString()" asp-route-method="showcarousel"></button>
                                     </div>
-
-                                    <div class="player-position">
-                                        <label class="jersey-number sub-text">7</label>
-                                        <label class="position sub-text">MF</label>
+                                    <div class="field-player-name">
+                                        <label>@name</label>
                                     </div>
-
-
-                                    <div class="player-picture">
-                                        <img src="img/icons8-male-user-100.png" alt="">
-                                    </div>
-
-                                    <div class="player-card-stats">
-                                        <div class="stat-box">
-                                            <label class="stat-value">146</label>
-                                            <label class="stat-name sub-text">Punkte</label>
-                                        </div>
-                                        <div class="stat-box">
-                                            <label class="stat-value">@Model.CarouselPlayers[i].Einsaetze</label>
-                                            <label class="stat-name sub-text">Einsätze</label>
-                                        </div>
-                                        <div class="stat-box">
-                                            <label class="stat-value">10</label>
-                                            <label class="stat-name sub-text">Fouls</label>
-                                        </div>
-                                        <div class="stat-box">
-                                            <label class="stat-value">0</label>
-                                            <label class="stat-name sub-text">Karten</label>
-                                        </div>
-                                        <div class="stat-box">
-                                            <label class="stat-value">@Model.CarouselPlayers[i].Tore</label>
-                                            <label class="stat-name sub-text">Tore</label>
-                                        </div>
-                                        <div class="stat-box">
-                                            <label class="stat-value">3</label>
-                                            <label class="stat-name sub-text">Assits</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="player-card-value">
-                                        <label class="player-value">Marktwert: @Model.CarouselPlayers[i].Marktwert</label>
-                                    </div>
-                                    <div class="player-card-points">
-                                        <label class="player-points">Gesamtpunkt: 2.197</label>
-
-                                    </div>
+                                    @if (@id > 0)
+                                    {
+                                        <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                                    }
                                 </div>
+                            }
 
+                            for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[2].ToString()); i++)
+                            {
+                                id = 0;
+                                name = "Name";
+                                if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).Count() > i)
+                                {
+                                    name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).ToList()[i]).Name;
+                                    id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).ToList()[i]).Id;
+                                }
+
+                                <div class="field-player">
+                                    <div class="field-player-picture">
+                                        <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Midfield.ToString()" asp-route-method="showcarousel"></button>
+                                    </div>
+                                    <div class="field-player-name">
+                                        <label>@name</label>
+                                    </div>
+                                    @if (@id > 0)
+                                    {
+                                        <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                                    }
+                                </div>
+                            }
+
+                            for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[1].ToString()); i++)
+                            {
+                                id = 0;
+                                name = "Name";
+                                if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).Count() > i)
+                                {
+                                    name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).ToList()[i]).Name;
+                                    id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).ToList()[i]).Id;
+                                }
+
+                                <div class="field-player">
+                                    <div class="field-player-picture">
+                                        <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Defense.ToString()" asp-route-method="showcarousel"></button>
+                                    </div>
+                                    <div class="field-player-name">
+                                        <label>@name</label>
+                                    </div>
+                                    @if (@id > 0)
+                                    {
+                                        <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                                    }
+                                </div>
+                            }
+
+                            id = 0;
+                            name = "Name";
+                            if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).Count() > 0)
+                            {
+                                name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).ToList()[0]).Name;
+                                id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).ToList()[0]).Id;
+                            }
+
+                            <div class="field-player">
+                                <div class="field-player-picture">
+                                    <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Goal.ToString()" asp-route-method="showcarousel"></button>
+                                </div>
+                                <div class="field-player-name">
+                                    <label>@name</label>
+                                </div>
+                                @if (@id > 0)
+                                {
+                                    <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
+                                }
                             </div>
-                        </button>
-                    }
-                }
+
+
+                        }
+
+                    </div>
+
+                </div>
+
 
             </div>
-
-            <div class="field">
-
-
-                <div class="field-players @Model.team.Formation">
+            <div class="col-sm-8">
+                <div class="player-carousel">
 
                     @{
-                        string name = "";
-                        int id = 0;
-
-                        for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[3].ToString()); i++)
+                        for (int i = 0; i < Model.CarouselPlayers.Count; i++)
                         {
-                            id = 0;
-                            name = "Name";
-                            if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).Count() > i)
-                            {
-                                name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).ToList()[i]).Name;
-                                id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Striker).ToList()[i]).Id;
-                            }
+                            <button class="card-button" asp-route-player="@Model.CarouselPlayers[i].Id" asp-route-method="addplayer">
+                                <div class="player-card">
+                                    <div class="player-card-main">
+                                        <div class="player-name">
+                                            <label class="last-name">@Model.CarouselPlayers[i].Name</label>
+                                        </div>
 
-                            <div class="field-player">
-                                <div class="field-player-picture">
-                                    <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Striker.ToString()" asp-route-method="showcarousel"></button>
+                                        <div class="player-position">
+                                            <label class="jersey-number sub-text">7</label>
+                                            <label class="position sub-text">MF</label>
+                                        </div>
+
+
+                                        <div class="player-picture">
+                                            <img src="img/icons8-male-user-100.png" alt="">
+                                        </div>
+
+                                        <div class="player-card-stats">
+                                            <div class="stat-box">
+                                                <label class="stat-value">146</label>
+                                                <label class="stat-name sub-text">Punkte</label>
+                                            </div>
+                                            <div class="stat-box">
+                                                <label class="stat-value">@Model.CarouselPlayers[i].Einsaetze</label>
+                                                <label class="stat-name sub-text">Einsätze</label>
+                                            </div>
+                                            <div class="stat-box">
+                                                <label class="stat-value">10</label>
+                                                <label class="stat-name sub-text">Fouls</label>
+                                            </div>
+                                            <div class="stat-box">
+                                                <label class="stat-value">0</label>
+                                                <label class="stat-name sub-text">Karten</label>
+                                            </div>
+                                            <div class="stat-box">
+                                                <label class="stat-value">@Model.CarouselPlayers[i].Tore</label>
+                                                <label class="stat-name sub-text">Tore</label>
+                                            </div>
+                                            <div class="stat-box">
+                                                <label class="stat-value">3</label>
+                                                <label class="stat-name sub-text">Assits</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="player-card-value">
+                                            <label class="player-value">Marktwert: @Model.CarouselPlayers[i].Marktwert</label>
+                                        </div>
+                                        <div class="player-card-points">
+                                            <label class="player-points">Gesamtpunkt: 2.197</label>
+
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="field-player-name">
-                                    <label>@name</label>
-                                </div>
-                                @if (@id > 0)
-                                {
-                                    <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
-                                }
-                            </div>
+                            </button>
                         }
-
-                        for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[2].ToString()); i++)
-                        {
-                            id = 0;
-                            name = "Name";
-                            if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).Count() > i)
-                            {
-                                name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).ToList()[i]).Name;
-                                id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Midfield).ToList()[i]).Id;
-                            }
-
-                            <div class="field-player">
-                                <div class="field-player-picture">
-                                    <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Midfield.ToString()" asp-route-method="showcarousel"></button>
-                                </div>
-                                <div class="field-player-name">
-                                    <label>@name</label>
-                                </div>
-                                @if (@id > 0)
-                                {
-                                    <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
-                                }
-                            </div>
-                        }
-
-                        for (var i = 0; i < (int)Convert.ToUInt32(Model.team.Formation[1].ToString()); i++)
-                        {
-                            id = 0;
-                            name = "Name";
-                            if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).Count() > i)
-                            {
-                                name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).ToList()[i]).Name;
-                                id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Defense).ToList()[i]).Id;
-                            }
-
-                            <div class="field-player">
-                                <div class="field-player-picture">
-                                    <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Defense.ToString()" asp-route-method="showcarousel"></button>
-                                </div>
-                                <div class="field-player-name">
-                                    <label>@name</label>
-                                </div>
-                                @if (@id > 0)
-                                {
-                                    <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
-                                }
-                            </div>
-                        }
-
-                        id = 0;
-                        name = "Name";
-                        if (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).Count() > 0)
-                        {
-                            name = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).ToList()[0]).Name;
-                            id = (Model.team.Players.Where(_p => _p.Position == Player.PlayerPosition.Goal).ToList()[0]).Id;
-                        }
-
-                        <div class="field-player">
-                            <div class="field-player-picture">
-                                <button class="field-player-button" asp-route-addtype="@Player.PlayerPosition.Goal.ToString()" asp-route-method="showcarousel"></button>
-                            </div>
-                            <div class="field-player-name">
-                                <label>@name</label>
-                            </div>
-                            @if (@id > 0)
-                            {
-                                <button class="remove-player-button" asp-route-player="@id" asp-route-method="removeplayer"></button>
-                            }
-                        </div>
-
-
                     }
 
                 </div>
 
             </div>
-            <div>
 
 
 
-                @{
-                    if (Model.team.Players.Count == 11)
-                    {
-                        <input type="submit" value="Test" asp-route-method="done" class="btn btn-primary" />
-                    }
+
+        </div>
+
+
+
+
+
+        <div>
+
+
+
+            @{
+                if (Model.team.Players.Count == 11)
+                {
+                    <input type="submit" value="Test" asp-route-method="done" class="btn btn-primary" />
                 }
+            }
 
-            </div>
+        </div>
 
 
-        </form>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </form>
 
-    </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 }
