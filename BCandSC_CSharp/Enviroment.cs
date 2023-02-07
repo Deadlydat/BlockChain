@@ -28,5 +28,16 @@ namespace BCandSC_CSharp
 
             return enviroment;
         }
+
+        public static void SetMatchday()
+        {
+            Database db = new();
+            SqlCommand command = new SqlCommand("UPDATE Enviroment SET matchday = matchday + 1");
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            command.ExecuteNonQuery();
+            db.conn.Close();
+        }
     }
 }

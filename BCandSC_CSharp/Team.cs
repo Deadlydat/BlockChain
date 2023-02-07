@@ -11,6 +11,7 @@ namespace BCandSC_CSharp
         public List<Player> Players { get; set; } = new List<Player>();
         public int TotalPoints { get; set; } = 0;
         public string Formation { get; set; } = "";
+        public bool Done { get; set; } = false;
 
         public void CreateTeam(int userid, string name, int matchday)
         {
@@ -59,6 +60,29 @@ namespace BCandSC_CSharp
             }
         }
 
+        public void SetTeamDone(bool isDone, int teamId)
+        {
+            Database db = new();
+            try
+            {
+                SqlCommand command = new SqlCommand("UPDATE Team SET done = @done WHERE team_id = @team_id");
+                command.Parameters.Add(new SqlParameter { ParameterName = "@team_id", Value = teamId, SqlDbType = SqlDbType.Int });
+                command.Parameters.Add(new SqlParameter { ParameterName = "@done", Value = isDone, SqlDbType = SqlDbType.Bit });
+
+                db.conn.Open();
+                command.Connection = db.conn;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
+        }
+
         public List<Team> GetTeamList(int userid)
         {
             List<Team> list = new List<Team>();
@@ -77,6 +101,7 @@ namespace BCandSC_CSharp
                 team.Name = reader.GetString("name");
                 team.TotalPoints = reader.GetInt32("TotalPoints");
                 team.Players = GetPlayersForTeam(team.Id);
+                team.Done = reader.GetBoolean("done");
                 list.Add(team);
             }
             reader.Close();
@@ -127,6 +152,7 @@ namespace BCandSC_CSharp
                 team.Id = reader.GetInt32("team_id");
                 team.Formation = reader.GetString("formation");
                 team.Name = reader.GetString("name");
+                team.Done = reader.GetBoolean("done");
             }
             reader.Close();
             db.conn.Close();

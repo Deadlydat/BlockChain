@@ -14,7 +14,9 @@ namespace BCandSC_CSharp.Pages
         Team team { get; set; } = new();
         public List<Team> teams { get; set; } = new();
         public User user { get; set; } = new();
-
+        public double AccountBalanceETH { get; set; } = 0;
+        public double AccountBalanceEUR { get; set; } = 0;
+        public double AccountBalanceUSD { get; set; } = 0;
 
         public IActionResult OnGet()
         {
@@ -29,10 +31,25 @@ namespace BCandSC_CSharp.Pages
 
             //if (t.Id > 0)
             //    return RedirectToPage("/Formation", new { userId = userId });
+            if (t.Formation != "" && t.Done == false)
+                return RedirectToPage("/PlayerSelection", new { UserId = userId });
+
+            if (t.Id > 0 && t.Done == false)
+                return RedirectToPage("/Formation", new { userId = userId });
 
 
             teams = t.GetTeamList(userId);
             user = user.GetUser(userId);
+
+
+            MoneyConversion.DataObject data = MoneyConversion.GetAccountBalanceInFiatMoney(user);
+            BlockchainInterface blockchainInterface = new();
+
+            AccountBalanceEUR = data.EUR;
+            AccountBalanceUSD = data.USD;
+            AccountBalanceETH = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+
+
 
             return Page();
         }
@@ -42,7 +59,7 @@ namespace BCandSC_CSharp.Pages
             User u = new();
             u = u.GetUser(userId);
 
-            team.CreateTeam(userId, $"Team {u.Name} für Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
+            team.CreateTeam(userId, $"Team {u.Name} fï¿½r Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
 
 
             return RedirectToPage("/Formation", new { userId = userId });
