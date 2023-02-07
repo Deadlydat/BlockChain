@@ -14,7 +14,9 @@ namespace BCandSC_CSharp.Pages
         Team team { get; set; } = new();
         public List<Team> teams { get; set; } = new();
         public User user { get; set; } = new();
-
+        public double AccountBalanceETH { get; set; } = 0;
+        public double AccountBalanceEUR { get; set; } = 0;
+        public double AccountBalanceUSD { get; set; } = 0;
 
         public IActionResult OnGet()
         {
@@ -30,6 +32,16 @@ namespace BCandSC_CSharp.Pages
 
             teams = t.GetTeamList(userId);
             user = user.GetUser(userId);
+
+
+            MoneyConversion.DataObject data = MoneyConversion.GetAccountBalanceInFiatMoney(user);
+            BlockchainInterface blockchainInterface = new();
+
+            AccountBalanceEUR = data.EUR;
+            AccountBalanceUSD = data.USD;
+            AccountBalanceETH = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+
+
 
             return Page();
         }

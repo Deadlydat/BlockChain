@@ -37,16 +37,18 @@ namespace BCandSC_CSharp.Pages
                 Console.WriteLine("finished game");
 
 
-          
+
             }
 
             if (Request.Query["method"] == "prices")
             {
-         Console.WriteLine("getting results from game..");
+                Console.WriteLine("getting results from game..");
                 Team winnerTeam = gamelogic.GetResultsForMatch();
                 BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
                 Console.WriteLine("winner team: " + winnerTeam.Name + "-> end matchday");
-                //matchday +1
+                Enviroment.SetMatchday();
+                //db user trans aktual
+
 
             }
 
@@ -55,8 +57,15 @@ namespace BCandSC_CSharp.Pages
 
             if (Request.Query["method"] == "money")
             {
+               MoneyConversion.DataObject data =  MoneyConversion.GetETHValueFromApi().Result;
+                Console.WriteLine(data.USD +" "+ data.EUR);
 
+                User user= new User();
+                user = user.GetUser(45);
 
+                MoneyConversion.DataObject data2 = MoneyConversion.GetAccountBalanceInFiatMoney(user);
+                Console.WriteLine(data2.USD +" "+ data2.EUR);
+                    
             }
 
 
