@@ -13,6 +13,7 @@ namespace BCandSC_CSharp.Pages
         public int Matchday { get; set; } = 0;
         Team team { get; set; } = new();
         public List<Team> teams { get; set; } = new();
+        public User user { get; set; } = new();
 
 
         public IActionResult OnGet()
@@ -31,6 +32,7 @@ namespace BCandSC_CSharp.Pages
 
 
             teams = t.GetTeamList(userId);
+            user = user.GetUser(userId);
 
             return Page();
         }
