@@ -69,8 +69,8 @@ namespace BCandSC_CSharp.Pages
                 User user = new User();
                 user = user.GetUser(UserId);
 
-                BlockchainInterface blockchainInterface = new BlockchainInterface();
-                blockchainInterface.Bet(team.Name, user.PrivateKey);
+                //BlockchainInterface blockchainInterface = new BlockchainInterface();
+                //blockchainInterface.Bet(team.Name, user.PrivateKey);
 
            
                 return RedirectToPage("/Matchday", new { userId = UserId });
