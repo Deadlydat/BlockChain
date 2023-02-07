@@ -42,11 +42,12 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 20px;
             font-weight: 350;
+            padding-top: 20px;
         }
 
         .card-body {
             flex: 1 1 auto;
-            padding: 1.25rem;
+            padding: 0;
             color: white;
             background: url(img/StationMatchday.jpg) no-repeat center center/cover;
             border-radius: 10px;
@@ -58,7 +59,7 @@
 
         .card-body1 {
             flex: 1 1 auto;
-            padding: 1.25rem;
+            padding: 0rem;
             color: white;
             background: url(img/pitchgoal.jpg) no-repeat center center/cover;
             border-radius: 10px;
@@ -162,12 +163,20 @@
                 font-size: 3.375rem;
             }
 
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+            margin-bottom: -40px;
+        }
+
         .row1 {
             display: flex;
             flex-wrap: wrap;
             margin-right: -5px;
             margin-left: -5px;
-            margin-top: 20px;
+            margin-top: 50px;
         }
 
         .form-group-statics {
@@ -184,16 +193,63 @@
             border: 1px solid rgb(255, 255, 255);
             border-radius: 10px;
             margin: 10px;
+            margin-top: 25px;
+            height: 87%;
+            background-color: #343a40;
         }
 
         p {
-            margin-top: 40px;
+            margin-top: 20px;
             margin-bottom: 1rem;
-            padding: 20px;
+            padding: 0px;
             text-align: center;
         }
 
-        
+        label[for="PlayerName"] {
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            background-color: #00000091;
+            justify-content: flex-start;
+            color: white;
+            margin: 0px;
+            height: 118%;
+            padding-left: 20px;
+        }
+
+
+        label[for="totalpoints"] {
+            color: #fff;
+            max-width: 100%;
+            width: 40%;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+        label[for="ergebnis"] {
+            color: #fff;
+            max-width: 100%;
+            width: 100%;
+            background-color: #a69f3775;
+            font-size: 14px;
+        }
+
+        label[for="Profilsets"] {
+            color: #fff;
+            font-size: 15px;
+            justify-content: flex-start;
+            display: flex;
+            text-align: justify;
+            padding-left: 20px;
+            margin-bottom: -5px;
+        }
+       
+
+        .form-group {
+            margin-bottom: 0rem;
+            text-align: center;
+        }
+
     </style>
 
     ViewData["Title"] = "Willkommen zu Spieltag " + Model.Matchday;
@@ -216,42 +272,51 @@
             </div>
         </nav>
 
+       
 
-        <div class="container1">
 
-            <h3 id="headline">Der nächste Spieltag beginnt in:</h3>
-            <div id="countdown">
-                <ul>
-                    <li><span id="days"></span>days</li>
-                    <li><span id="hours"></span>Hours</li>
-                    <li><span id="minutes"></span>Minutes</li>
-                    <li><span id="seconds"></span>Seconds</li>
-                </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                 <div class="container1">
+                    <h3 id="headline">Der nächste Spieltag beginnt in:</h3>
+                    <div id="countdown">
+                        <ul>
+                            <li><span id="days"></span>days</li>
+                            <li><span id="hours"></span>Hours</li>
+                            <li><span id="minutes"></span>Minutes</li>
+                            <li><span id="seconds"></span>Seconds</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group-SPieltag">
+                        <input type="submit" value="Spieltag starten" class="btn btn-primary" />
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-4">
+
+
+                    <div class="personal">
+                        <p>
+                            <label for="Profilsets">Username: @Model.user.Name </label><br>
+                            <label for="Profilsets">ETH: @Model.AccountBalanceETH </label><br>
+                            <label for="Profilsets">EUR: @Model.AccountBalanceEUR </label><br>
+                            <label for="Profilsets">USD: @Model.AccountBalanceUSD</label><br>
+                            <label for="Profilsets">Spieltag: @Enviroment.GetEnviroment().Matchday</label><br>
+                        </p>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group-SPieltag">
-                <input type="submit" value="Spieltag starten" class="btn btn-primary" />
-            </div>
-
-
-
-
-
-
-
         </div>
 
 
 
-        <div class="personal">
-            <p>
-            <label>@Model.user.Name, </label>
-            <label>@Model.AccountBalanceETH </label>
-            <label>@Model.AccountBalanceEUR </label>
-            <label>@Model.AccountBalanceUSD</label>
-            <label>@Enviroment.GetEnviroment().Matchday</label>
-        </p>
-        </div>
+
+
+
+
+
 
         <div class="row1">
 
@@ -263,7 +328,7 @@
                     </div>
                 </form>
             </div>
-      
+
 
             <div class="col-sm-4">
                 <div class="card">
@@ -275,16 +340,16 @@
 
                                 <h5 class="card-title">@t.Name</h5>
                                 <div class="form-group">
-                                    <label>Punkte: @t.TotalPoints</label>
+                                    <label for="totalpoints">Punkte: @t.TotalPoints</label>
                                 </div>
                                 <div class="form-group">
-                                    <label>Ergebnis: -10000€</label>
+                                    <label for="ergebnis">Ergebnis: -10000€</label>
                                 </div>
                                 <div class="form-group">
                                     @{
                                         foreach (Player p in t.Players)
                                         {
-                                            <label>@p.Name</label>
+                                            <label for="PlayerName">@p.Name   (@p.Points)</label>
 
                                             <br>
                                         }
@@ -309,14 +374,11 @@
 
 
         <p>
-            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
-            TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
+            Powered by BCSC Group 1
         </p>
 
 
-      
+
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -331,7 +393,7 @@
                     hour = minute * 60,
                     day = hour * 24;
 
-                let birthday = "Feb 10, 2023 20:0:00",
+                let birthday = "Feb 9, 2023 08:0:00",
                     countDown = new Date(birthday).getTime(),
                     x = setInterval(function () {
                         let now = new Date().getTime(),
