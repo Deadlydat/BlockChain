@@ -46,12 +46,12 @@ namespace BCandSC_CSharp.Pages
 
 
 
-            MoneyConversion.DataObject data = MoneyConversion.GetAccountBalanceInFiatMoney(user);
-            BlockchainInterface blockchainInterface = new();
+            //MoneyConversion.DataObject data = MoneyConversion.GetAccountBalanceInFiatMoney(user);
+            //BlockchainInterface blockchainInterface = new();
 
-            AccountBalanceEUR = data.EUR;
-            AccountBalanceUSD = data.USD;
-            AccountBalanceETH = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+            //AccountBalanceEUR = data.EUR;
+            //AccountBalanceUSD = data.USD;
+            //AccountBalanceETH = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
 
 
 

@@ -55,7 +55,7 @@ namespace BCandSC_CSharp
 
 
 
-        private bool CheckCurrentMatchday()
+        public bool CheckCurrentMatchday()
         {
             bool done = false;
             Database db = new();
