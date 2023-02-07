@@ -37,12 +37,19 @@ namespace BCandSC_CSharp.Pages
                 Console.WriteLine("finished game");
 
 
+          
+            }
+
+            if (Request.Query["method"] == "prices")
+            {
+         Console.WriteLine("getting results from game..");
                 Team winnerTeam = gamelogic.GetResultsForMatch();
                 BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
                 Console.WriteLine("winner team: " + winnerTeam.Name + "-> end matchday");
                 //matchday +1
 
             }
+
 
 
 

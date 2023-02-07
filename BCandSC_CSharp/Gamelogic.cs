@@ -57,7 +57,7 @@ namespace BCandSC_CSharp
         {
             List<Team> MatchDayResults = GetTotalPointsForTeam();
 
-            List<Team> SortedList = MatchDayResults.OrderBy(o => o.TotalPoints).ToList();
+            List<Team> SortedList = MatchDayResults.OrderByDescending(o => o.TotalPoints).ToList();
 
             return SortedList.First();
         }
