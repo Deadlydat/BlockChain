@@ -6,8 +6,8 @@ namespace BCandSC_CSharp.Pages
     public class SimulationModel : PageModel
     {
 
-        Gamelogic gamelogic;
-        BlockchainInterface BlockchainInterface;
+        public Gamelogic gamelogic =new(Enviroment.GetEnviroment().Matchday);
+        public BlockchainInterface BlockchainInterface=new ();
         private String adminKey = "0xc815fa507181842ea2c85b12d75dc162b633d1c69d87e351bb86406f3db5b72f";
 
 
@@ -22,8 +22,8 @@ namespace BCandSC_CSharp.Pages
 
             if (Request.Query["method"] == "startmatchday")
             {
-                gamelogic = new Gamelogic(Enviroment.GetEnviroment().Matchday);
-                BlockchainInterface = new BlockchainInterface();
+                //gamelogic = new Gamelogic(Enviroment.GetEnviroment().Matchday);
+                //BlockchainInterface = new BlockchainInterface();
                 Console.WriteLine("started Matchday now you can bet");
 
             }
@@ -47,7 +47,7 @@ namespace BCandSC_CSharp.Pages
             {
                 Team winnerTeam = gamelogic.GetResultsForMatch();
                 BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
-                Console.WriteLine("winner team "+winnerTeam.Name+" end machtday");
+                Console.WriteLine("winner team " + winnerTeam.Name + " end machtday");
 
                 //matchday +1
 
