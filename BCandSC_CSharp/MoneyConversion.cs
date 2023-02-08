@@ -61,10 +61,10 @@ namespace BCandSC_CSharp
             BlockchainInterface blockchainInterface = new(user);
             var balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance());
 
-          
 
 
-            double betETH = betAmount / data.EUR ;
+
+            double betETH = betAmount / data.EUR;
 
 
             if (balance > betETH + gasFee)
@@ -98,7 +98,7 @@ namespace BCandSC_CSharp
                 var currentUserBalance = TurnAccountBalanceInFiatMoney(user.GetUserBalance(user.Id));
                 var newBalance = TurnAccountBalanceInFiatMoney(blockchainInterface.GetAccountBalance());
 
-                double transaction = currentUserBalance.EUR - newBalance.EUR;
+                double transaction = newBalance.EUR - currentUserBalance.EUR;
 
 
                 user.SetUserTransaction(user.Id, matchDay, (decimal)transaction);
