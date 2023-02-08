@@ -5,8 +5,8 @@ using static BCandSC_CSharp.Player;
 using Nethereum.Contracts.Standards.ENS.PublicResolver.ContractDefinition;
 using Nethereum.Web3;
 using Nethereum.Web3.Accounts;
-using Betting.Betting.ContractDefinition;
-using Betting.Betting;
+using BettingContract.Betting.ContractDefinition;
+using BettingContract.Betting;
 using Nethereum.RPC.Eth.DTOs;
 using Newtonsoft.Json.Linq;
 
@@ -54,13 +54,14 @@ namespace BCandSC_CSharp
 
         public JArray DistributePrices(string teamRepresentationOfWinner, string privateKey)
         {
-            _account = new Account(privateKey);
-            _web3 = new Web3(_account, Url);
-            _bettingService = new BettingService(_web3, ContractAddress);
+            //_account = new Account(privateKey);
+            //_web3 = new Web3(_account, Url);
+            //_bettingService = new BettingService(_web3, ContractAddress);
 
-            return _bettingService.DistributePrizesRequestAndWaitForReceiptAsync(new DistributePrizesFunction()
-                    { TeamRepresentationOfWinner = teamRepresentationOfWinner, GasPrice = gas })
-                .Result.Logs;
+            //return _bettingService.DistributePrizesRequestAndWaitForReceiptAsync(new DistributePrizesFunction()
+            //        { TeamRepresentationOfWinner = teamRepresentationOfWinner, GasPrice = gas })
+            //    .Result.Logs;
+            return null;
         }
 
         public JArray StartGame(string privateKey)
