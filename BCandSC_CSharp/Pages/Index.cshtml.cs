@@ -33,12 +33,13 @@ namespace BCandSC_CSharp.Pages
             //    CreatePlayer(p.Id, 5, p.Punkte - 21);
             //}
 
-            
+
 
             //return RedirectToPage("/Formation", new { userId = 2 });
 
             //return RedirectToPage("/Matchday", new { userId = 42 });
             //return RedirectToPage("/Simulation");
+            //return RedirectToPage("/Matchday", new { userId = 1, done = true });
             return Page();
         }
 

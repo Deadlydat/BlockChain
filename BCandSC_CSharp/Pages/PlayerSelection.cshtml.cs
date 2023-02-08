@@ -77,7 +77,7 @@ namespace BCandSC_CSharp.Pages
                 team.SetTeamDone(true, team.Id);
 
            
-                return RedirectToPage("/Matchday", new { userId = UserId });
+                return RedirectToPage("/Matchday", new { userId = UserId, done = true });
             }
 
             setValues();

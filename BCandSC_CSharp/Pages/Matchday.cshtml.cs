@@ -16,6 +16,8 @@ namespace BCandSC_CSharp.Pages
         public double AccountBalanceETH { get; set; } = 0;
         public double AccountBalanceEUR { get; set; } = 0;
         public double AccountBalanceUSD { get; set; } = 0;
+        [BindProperty (SupportsGet = true)]
+        public bool done { get; set; } = false;
 
         public IActionResult OnGet()
         {
@@ -46,7 +48,7 @@ namespace BCandSC_CSharp.Pages
 
             BlockchainInterface blockchainInterface = new(user);
             //To Do casts reduzieren
-            if (gamelogic.CheckCurrentMatchday())
+            if (gamelogic.CheckCurrentMatchday() || done == true)
             {
                 decimal balance = blockchainInterface.GetAccountBalance();
 
