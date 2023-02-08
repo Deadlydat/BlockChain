@@ -22,7 +22,7 @@ namespace BCandSC_CSharp.Pages
             {
                 Console.WriteLine("starting game...");
                 BlockchainInterface.StartGame();
-                Console.WriteLine("started game betting is closed");
+                Console.WriteLine("started game. bets are closed");
                 Console.WriteLine("");
             }
 
@@ -49,12 +49,6 @@ namespace BCandSC_CSharp.Pages
 
             }
 
-
-            if (Request.Query["method"] == "money")
-            {
-
-                BlockchainInterface.GiveMoneyBack();
-            }
 
 
             return Page();
