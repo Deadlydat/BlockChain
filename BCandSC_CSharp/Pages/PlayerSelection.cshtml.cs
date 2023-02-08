@@ -50,6 +50,9 @@ namespace BCandSC_CSharp.Pages
 
             getValues();
 
+            if (Request.Query["method"] == "test")
+                test();
+
             //Spielerauswahl anzeigen
             if (Request.Query["method"] == "showcarousel")
                 ShowCarousel(Enum.Parse<Player.PlayerPosition>(Request.Query["addtype"]));
@@ -112,6 +115,21 @@ namespace BCandSC_CSharp.Pages
         public void RemovePlayerFromTeam()
         {
             player.RemovePlayerFromTeam(Convert.ToInt32(Request.Query["player"]), team.Id);
+        }
+
+        public void test()
+        {
+            player.SetPlayerToTeam(50, team.Id);
+            player.SetPlayerToTeam(16, team.Id);
+            player.SetPlayerToTeam(18, team.Id);
+            player.SetPlayerToTeam(33, team.Id);
+            player.SetPlayerToTeam(36, team.Id);
+            player.SetPlayerToTeam(38, team.Id);
+            player.SetPlayerToTeam(41, team.Id);
+            player.SetPlayerToTeam(44, team.Id);
+            player.SetPlayerToTeam(45, team.Id);
+            player.SetPlayerToTeam(64, team.Id);
+            player.SetPlayerToTeam(66, team.Id);
         }
 
         public void AddPlayerToTeam()
