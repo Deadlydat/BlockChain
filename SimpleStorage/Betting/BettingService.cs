@@ -10,9 +10,9 @@ using Nethereum.Contracts.CQS;
 using Nethereum.Contracts.ContractHandlers;
 using Nethereum.Contracts;
 using System.Threading;
-using Betting.Betting.ContractDefinition;
+using BettingContract.Betting.ContractDefinition;
 
-namespace Betting.Betting
+namespace BettingContract.Betting
 {
     public partial class BettingService
     {
@@ -74,17 +74,6 @@ namespace Betting.Betting
              return ContractHandler.SendRequestAndWaitForReceiptAsync(betFunction, cancellationToken);
         }
 
-        public Task<BigInteger> BetAmountQueryAsync(BetAmountFunction betAmountFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<BetAmountFunction, BigInteger>(betAmountFunction, blockParameter);
-        }
-
-        
-        public Task<BigInteger> BetAmountQueryAsync(BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<BetAmountFunction, BigInteger>(null, blockParameter);
-        }
-
         public Task<string> DistributePrizesRequestAsync(DistributePrizesFunction distributePrizesFunction)
         {
              return ContractHandler.SendRequestAsync(distributePrizesFunction);
@@ -95,18 +84,18 @@ namespace Betting.Betting
              return ContractHandler.SendRequestAndWaitForReceiptAsync(distributePrizesFunction, cancellationToken);
         }
 
-        public Task<string> DistributePrizesRequestAsync(string teamRepresentationOfWinner)
+        public Task<string> DistributePrizesRequestAsync(List<string> teamRepresentationOfWinners)
         {
             var distributePrizesFunction = new DistributePrizesFunction();
-                distributePrizesFunction.TeamRepresentationOfWinner = teamRepresentationOfWinner;
+                distributePrizesFunction.TeamRepresentationOfWinners = teamRepresentationOfWinners;
             
              return ContractHandler.SendRequestAsync(distributePrizesFunction);
         }
 
-        public Task<TransactionReceipt> DistributePrizesRequestAndWaitForReceiptAsync(string teamRepresentationOfWinner, CancellationTokenSource cancellationToken = null)
+        public Task<TransactionReceipt> DistributePrizesRequestAndWaitForReceiptAsync(List<string> teamRepresentationOfWinners, CancellationTokenSource cancellationToken = null)
         {
             var distributePrizesFunction = new DistributePrizesFunction();
-                distributePrizesFunction.TeamRepresentationOfWinner = teamRepresentationOfWinner;
+                distributePrizesFunction.TeamRepresentationOfWinners = teamRepresentationOfWinners;
             
              return ContractHandler.SendRequestAndWaitForReceiptAsync(distributePrizesFunction, cancellationToken);
         }
@@ -153,6 +142,26 @@ namespace Betting.Betting
             return ContractHandler.QueryAsync<GetPlayerCountFunction, BigInteger>(null, blockParameter);
         }
 
+        public Task<string> GiveMoneyBackRequestAsync(GiveMoneyBackFunction giveMoneyBackFunction)
+        {
+             return ContractHandler.SendRequestAsync(giveMoneyBackFunction);
+        }
+
+        public Task<string> GiveMoneyBackRequestAsync()
+        {
+             return ContractHandler.SendRequestAsync<GiveMoneyBackFunction>();
+        }
+
+        public Task<TransactionReceipt> GiveMoneyBackRequestAndWaitForReceiptAsync(GiveMoneyBackFunction giveMoneyBackFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(giveMoneyBackFunction, cancellationToken);
+        }
+
+        public Task<TransactionReceipt> GiveMoneyBackRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync<GiveMoneyBackFunction>(null, cancellationToken);
+        }
+
         public Task<string> KillRequestAsync(KillFunction killFunction)
         {
              return ContractHandler.SendRequestAsync(killFunction);
@@ -173,17 +182,6 @@ namespace Betting.Betting
              return ContractHandler.SendRequestAndWaitForReceiptAsync<KillFunction>(null, cancellationToken);
         }
 
-        public Task<BigInteger> MoneyPoolQueryAsync(MoneyPoolFunction moneyPoolFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<MoneyPoolFunction, BigInteger>(moneyPoolFunction, blockParameter);
-        }
-
-        
-        public Task<BigInteger> MoneyPoolQueryAsync(BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<MoneyPoolFunction, BigInteger>(null, blockParameter);
-        }
-
         public Task<string> OwnerQueryAsync(OwnerFunction ownerFunction, BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerFunction, string>(ownerFunction, blockParameter);
@@ -193,33 +191,6 @@ namespace Betting.Betting
         public Task<string> OwnerQueryAsync(BlockParameter blockParameter = null)
         {
             return ContractHandler.QueryAsync<OwnerFunction, string>(null, blockParameter);
-        }
-
-        public Task<PlayerInfoOutputDTO> PlayerInfoQueryAsync(PlayerInfoFunction playerInfoFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryDeserializingToObjectAsync<PlayerInfoFunction, PlayerInfoOutputDTO>(playerInfoFunction, blockParameter);
-        }
-
-        public Task<PlayerInfoOutputDTO> PlayerInfoQueryAsync(string returnValue1, BlockParameter blockParameter = null)
-        {
-            var playerInfoFunction = new PlayerInfoFunction();
-                playerInfoFunction.ReturnValue1 = returnValue1;
-            
-            return ContractHandler.QueryDeserializingToObjectAsync<PlayerInfoFunction, PlayerInfoOutputDTO>(playerInfoFunction, blockParameter);
-        }
-
-        public Task<string> PlayersQueryAsync(PlayersFunction playersFunction, BlockParameter blockParameter = null)
-        {
-            return ContractHandler.QueryAsync<PlayersFunction, string>(playersFunction, blockParameter);
-        }
-
-        
-        public Task<string> PlayersQueryAsync(BigInteger returnValue1, BlockParameter blockParameter = null)
-        {
-            var playersFunction = new PlayersFunction();
-                playersFunction.ReturnValue1 = returnValue1;
-            
-            return ContractHandler.QueryAsync<PlayersFunction, string>(playersFunction, blockParameter);
         }
 
         public Task<string> StartGameRequestAsync(StartGameFunction startGameFunction)
@@ -240,6 +211,32 @@ namespace Betting.Betting
         public Task<TransactionReceipt> StartGameRequestAndWaitForReceiptAsync(CancellationTokenSource cancellationToken = null)
         {
              return ContractHandler.SendRequestAndWaitForReceiptAsync<StartGameFunction>(null, cancellationToken);
+        }
+
+        public Task<string> TransferOwnershipRequestAsync(TransferOwnershipFunction transferOwnershipFunction)
+        {
+             return ContractHandler.SendRequestAsync(transferOwnershipFunction);
+        }
+
+        public Task<TransactionReceipt> TransferOwnershipRequestAndWaitForReceiptAsync(TransferOwnershipFunction transferOwnershipFunction, CancellationTokenSource cancellationToken = null)
+        {
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(transferOwnershipFunction, cancellationToken);
+        }
+
+        public Task<string> TransferOwnershipRequestAsync(string newOwner)
+        {
+            var transferOwnershipFunction = new TransferOwnershipFunction();
+                transferOwnershipFunction.NewOwner = newOwner;
+            
+             return ContractHandler.SendRequestAsync(transferOwnershipFunction);
+        }
+
+        public Task<TransactionReceipt> TransferOwnershipRequestAndWaitForReceiptAsync(string newOwner, CancellationTokenSource cancellationToken = null)
+        {
+            var transferOwnershipFunction = new TransferOwnershipFunction();
+                transferOwnershipFunction.NewOwner = newOwner;
+            
+             return ContractHandler.SendRequestAndWaitForReceiptAsync(transferOwnershipFunction, cancellationToken);
         }
     }
 }
