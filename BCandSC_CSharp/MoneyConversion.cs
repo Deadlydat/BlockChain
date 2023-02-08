@@ -45,7 +45,7 @@ namespace BCandSC_CSharp
 
 
 
-        public static DataObject TurnAccountBalanceInFiatMoney( decimal balance)
+        public static DataObject TurnAccountBalanceInFiatMoney(decimal balance)
         {
             DataObject dataObject = new DataObject();
             DataObject data = GetETHValueFromApi().Result;
@@ -58,6 +58,70 @@ namespace BCandSC_CSharp
             dataObject.EUR = Math.Round(Decimal.ToDouble(balance) * data.EUR, 2);
 
             return dataObject;
+        }
+
+
+
+        public static void BetCertainAmount(string teamRepresantion, int betAmount, User user)
+        {
+            DataObject dataObject = new DataObject();
+            DataObject data = GetETHValueFromApi().Result;
+
+            double gasFee = 0;
+
+
+            BlockchainInterface blockchainInterface = new();
+            double balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+
+
+            double betETH = betAmount / data.EUR;
+
+
+            if (balance > betETH + gasFee)
+            {
+
+                //hier neue bet funktion
+
+                blockchainInterface.Bet(teamRepresantion, user.PrivateKey);
+            }
+            else
+            {
+
+                //warning for user
+            }
+
+        }
+
+
+
+
+
+        public static void CalculateTransactionForParticipants(int matchDay)
+        {
+
+            Gamelogic gamelogic = new(matchDay);
+            BlockchainInterface blockchainInterface = new();
+
+            List<int> participantsId = gamelogic.GetListOfParticipantsForTheMatchday();
+
+            foreach (var item in participantsId)
+            {
+                User user = new User();
+                user = user.GetUser(item);
+
+                decimal accountBalance = user.GetUserBalance(user.Id);
+                decimal newBalance = blockchainInterface.GetAccountBalance(user.Address);
+
+                decimal transaction = accountBalance - newBalance;
+
+                var data = TurnAccountBalanceInFiatMoney(transaction);
+
+
+                user.SetUserTransaction(user.Id, matchDay, (int)data.EUR);
+
+
+            }
+
         }
 
 

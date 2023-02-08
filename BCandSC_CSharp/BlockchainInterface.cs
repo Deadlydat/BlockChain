@@ -18,7 +18,8 @@ namespace BCandSC_CSharp
         private const string Url = "https://rpc.ankr.com/eth_goerli";
         // this is the private key of the contract owner
         private const string PrivateKey = "0xc815fa507181842ea2c85b12d75dc162b633d1c69d87e351bb86406f3db5b72f";
-        private const string ContractAddress = "0xE1D9739D0CF03fC0396892ba682ed1E6d008C730";
+        private const string ContractAddress = "0x51322aa0E842710B20E00F0E480fe807FA36a057";
+
         private Account _account;
         private Web3 _web3;
         private BettingService _bettingService;

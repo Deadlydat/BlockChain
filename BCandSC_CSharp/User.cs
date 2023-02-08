@@ -52,14 +52,14 @@ namespace BCandSC_CSharp
 
             return user;
         }
-        public void SetUserBalance(int userId, float balance)
+        public void SetUserBalance(int userId, decimal balance)
         {
             Database db = new();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO User (balance) VALUES @balance WHERE user_id = @user_id");
+                SqlCommand command = new SqlCommand("UPDATE [User] SET account_balance = @balance  WHERE ([user_id] = @user_id)");
                 SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
-                SqlParameter param2 = new SqlParameter { ParameterName = "@balance", Value = balance, SqlDbType = SqlDbType.Float };
+                SqlParameter param2 = new SqlParameter { ParameterName = "@balance", Value = balance, SqlDbType = SqlDbType.Decimal };
 
 
                 command.Parameters.Add(param1);
@@ -79,9 +79,9 @@ namespace BCandSC_CSharp
             }
         }
 
-        public double GetUserBalance(int userId)
+        public decimal GetUserBalance(int userId)
         {
-            double result = 0.0;
+            decimal result = 0;
             Database db = new();
 
             SqlCommand command = new SqlCommand("SELECT * FROM User WHERE ([user_id] = @user_id)");
@@ -100,7 +100,7 @@ namespace BCandSC_CSharp
                 using SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read() == true)
                 {
-                    result = (double)reader.GetFloat("balance");
+                    result = reader.GetDecimal("balance");
                 }
             }
             catch (Exception e)

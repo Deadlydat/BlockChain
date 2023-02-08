@@ -8,7 +8,7 @@ namespace BCandSC_CSharp.Pages
 
         public Gamelogic gamelogic = new(Enviroment.GetEnviroment().Matchday);
         public BlockchainInterface BlockchainInterface = new();
-        private String adminKey = "0xc815fa507181842ea2c85b12d75dc162b633d1c69d87e351bb86406f3db5b72f";
+        private String adminKey = "0x2a0635d67d97ae1abeaab336f7c409acbc4330cbd30eab78934cab02e147d0af";
 
 
         public IActionResult OnGet()
@@ -46,8 +46,7 @@ namespace BCandSC_CSharp.Pages
                 Team winnerTeam = gamelogic.GetResultsForMatch();
                 BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
                 Console.WriteLine("winner team: " + winnerTeam.Name + "-> end matchday");
-                Enviroment.SetMatchday();
-                //db user trans aktual
+
 
 
             }
@@ -65,6 +64,21 @@ namespace BCandSC_CSharp.Pages
 
                 //MoneyConversion.DataObject data2 = MoneyConversion.GetAccountBalanceInFiatMoney(user);
                 //Console.WriteLine(data2.USD + " " + data2.EUR);
+
+                //Console.WriteLine("money: " + BlockchainInterface.GetMoneyPool());
+                //Console.WriteLine("players: " + BlockchainInterface.GetPlayerCount());
+
+                User user = new();
+
+                decimal balance = BlockchainInterface.GetAccountBalance("0x563ADff6863de0853B305B61E2DdfCd91bD8c448");
+                user.SetUserBalance(45, balance);
+
+
+
+                //MoneyConversion.CalculateTransactionForParticipants(Enviroment.GetEnviroment().Matchday);
+                //Console.WriteLine("new matchday!");
+                //Enviroment.SetMatchday();
+
 
             }
 

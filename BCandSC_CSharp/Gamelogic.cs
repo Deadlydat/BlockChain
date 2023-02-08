@@ -51,6 +51,39 @@ namespace BCandSC_CSharp
             return PointsForTeam;
         }
 
+        public List<int> GetListOfParticipantsForTheMatchday()
+        {
+            List<int> Participants = new();
+            Database db = new();
+
+            SqlCommand command = new SqlCommand("SELECT user_id FROM UserMatchdayPoints WHERE matchday=@matchday");
+
+            SqlParameter param = new SqlParameter
+            {
+                ParameterName = "@matchDay",
+                Value = matchDay,
+                SqlDbType = SqlDbType.Int
+            };
+            command.Parameters.Add(param);
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read() == true)
+            {
+                int participantId = reader.GetInt32("user_id");
+
+                Participants.Add(participantId);
+
+            }
+            reader.Close();
+            db.conn.Close();
+
+            return Participants;
+        }
+
+
 
 
 

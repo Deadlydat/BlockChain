@@ -57,21 +57,20 @@ namespace BCandSC_CSharp.Pages
                 AccountBalanceEUR = data.EUR;
                 AccountBalanceUSD = data.USD;
 
-                user.SetUserBalance(userId, (float)balance);
+                user.SetUserBalance(userId, balance);
 
 
 
             }
             else
             {
+                decimal balance =user.GetUserBalance(userId);
 
-                double oldBalance = user.GetUserBalance(userId);
-                double newBalance = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
-                double transaction = oldBalance - newBalance;
+                MoneyConversion.DataObject data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
 
-                user.SetUserTransaction(userId, Matchday, (int) transaction); 
-
-
+                AccountBalanceETH = Decimal.ToDouble(balance);
+                AccountBalanceEUR = data.EUR;
+                AccountBalanceUSD = data.USD;
 
             }
 
