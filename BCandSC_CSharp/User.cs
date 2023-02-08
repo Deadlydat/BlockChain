@@ -71,7 +71,7 @@ namespace BCandSC_CSharp
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message+"bal");
             }
             finally
             {
@@ -84,7 +84,7 @@ namespace BCandSC_CSharp
             decimal result = 0;
             Database db = new();
 
-            SqlCommand command = new SqlCommand("SELECT * FROM User WHERE ([user_id] = @user_id)");
+            SqlCommand command = new SqlCommand("SELECT * FROM [User] WHERE [user_id] = @user_id");
             SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
 
 
@@ -100,12 +100,12 @@ namespace BCandSC_CSharp
                 using SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read() == true)
                 {
-                    result = reader.GetDecimal("balance");
+                    result = reader.GetDecimal("account_balance");
                 }
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
+                Console.Write(e.Message+"hier");
             }
             finally
             {

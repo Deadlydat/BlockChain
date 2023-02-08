@@ -68,16 +68,16 @@ namespace BCandSC_CSharp.Pages
                 //Console.WriteLine("money: " + BlockchainInterface.GetMoneyPool());
                 //Console.WriteLine("players: " + BlockchainInterface.GetPlayerCount());
 
-                User user = new();
+                //User user = new();
 
-                decimal balance = BlockchainInterface.GetAccountBalance("0x563ADff6863de0853B305B61E2DdfCd91bD8c448");
-                user.SetUserBalance(45, balance);
+                //decimal balance = BlockchainInterface.GetAccountBalance("0x563ADff6863de0853B305B61E2DdfCd91bD8c448");
+                //user.SetUserBalance(45, balance);
 
 
 
-                //MoneyConversion.CalculateTransactionForParticipants(Enviroment.GetEnviroment().Matchday);
-                //Console.WriteLine("new matchday!");
-                //Enviroment.SetMatchday();
+                MoneyConversion.CalculateTransactionForParticipants(Enviroment.GetEnviroment().Matchday);
+                Console.WriteLine("new matchday!");
+                Enviroment.SetMatchday();
 
 
             }
