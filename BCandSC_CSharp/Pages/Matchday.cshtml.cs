@@ -16,7 +16,7 @@ namespace BCandSC_CSharp.Pages
         public double AccountBalanceETH { get; set; } = 0;
         public double AccountBalanceEUR { get; set; } = 0;
         public double AccountBalanceUSD { get; set; } = 0;
-        [BindProperty (SupportsGet = true)]
+        [BindProperty(SupportsGet = true)]
         public bool done { get; set; } = false;
 
         public IActionResult OnGet()
@@ -63,7 +63,7 @@ namespace BCandSC_CSharp.Pages
             else
             {
                 var balance = user.GetUserBalance(userId);
-                var data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
+                var data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);       
 
                 AccountBalanceETH = decimal.ToDouble(balance);
                 AccountBalanceEUR = data.EUR;
