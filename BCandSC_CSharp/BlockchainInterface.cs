@@ -18,7 +18,7 @@ namespace BCandSC_CSharp
         private const string Url = "https://rpc.ankr.com/eth_goerli";
 
 
-        private const string ContractAddress = "0x58387EEA716c5E07AEeF2bf92e1731E1e39cA7Fb";
+        private const string ContractAddress = "0xACE6A6F4e80aaA06a6C6069AbFC56C186F8BA55C";
         private const long gas = 20000000000;
 
         private Account _account;
