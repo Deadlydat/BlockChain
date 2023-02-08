@@ -48,7 +48,6 @@ namespace BCandSC_CSharp
                 player.Tore = reader.GetInt32("tore");
                 player.Mannschaft = reader.GetString("verein");
                 player.Position = (Player.PlayerPosition)reader.GetInt32("position");
-                player.Punkte = reader.GetInt32("punkte");
                 
             }
             reader.Close();

@@ -12,6 +12,7 @@ namespace BCandSC_CSharp
         public int TotalPoints { get; set; } = 0;
         public string Formation { get; set; } = "";
         public bool Done { get; set; } = false;
+        public decimal Transaction { get; set; } = 0;  
 
         public void CreateTeam(int userid, string name, int matchday)
         {
@@ -85,9 +86,10 @@ namespace BCandSC_CSharp
 
         public List<Team> GetTeamList(int userid)
         {
+            User u = new();
             List<Team> list = new List<Team>();
             Database db = new();            
-            SqlCommand command = new SqlCommand("SELECT * FROM UserMatchdayPoints WHERE (user_id = @user_id)");
+            SqlCommand command = new SqlCommand("SELECT * FROM Team WHERE (user_id = @user_id)");
             command.Parameters.Add(new SqlParameter { ParameterName = "@user_id", Value = userid, SqlDbType = SqlDbType.Int });
 
             db.conn.Open();
@@ -98,10 +100,14 @@ namespace BCandSC_CSharp
             {
                 Team team = new();
                 team.Id = reader.GetInt32("team_id");
-                team.Name = reader.GetString("name");
-                team.TotalPoints = reader.GetInt32("TotalPoints");
-                team.Players = GetPlayersForTeam(team.Id);
+                team.Name = reader.GetString("name");                
                 team.Done = reader.GetBoolean("done");
+                int matchday = reader.GetInt32("matchday");
+                team.Players = GetPlayersForTeam(team.Id, matchday);
+                team.Transaction = u.GetUserTransaction(userid, matchday);
+
+                team.TotalPoints = GetPointsForTeam(team.Id);
+
                 list.Add(team);
             }
             reader.Close();
@@ -110,7 +116,9 @@ namespace BCandSC_CSharp
             return list;
         }
 
-        public List<Player> GetPlayersForTeam(int teamId)
+
+
+        public List<Player> GetPlayersForTeam(int teamId, int matchday)
         {
             List<Player> list = new List<Player>();
             Database db = new();
@@ -124,7 +132,9 @@ namespace BCandSC_CSharp
             Player p = new();
             while (reader.Read())
             {
-                list.Add(p.GetPlayer(reader.GetInt32("player_id")));
+                p = p.GetPlayer(reader.GetInt32("player_id"));
+                p.Punkte = GetPointsForPlayer(p.Id, matchday);
+                list.Add(p);
             }
 
             list = list.OrderBy(x => x.Position).ToList();
@@ -133,6 +143,51 @@ namespace BCandSC_CSharp
             db.conn.Close();
 
             return list;
+        }
+
+        public int GetPointsForPlayer(int playerId, int matchday)
+        {
+            Database db = new();
+            int punkte = 0;
+            SqlCommand command = new SqlCommand("SELECT * FROM PlayerPoints WHERE (player_id = @player_id) AND (matchday = @matchday)");
+            command.Parameters.Add(new SqlParameter { ParameterName = "@player_id", Value = playerId, SqlDbType = SqlDbType.Int });
+            command.Parameters.Add(new SqlParameter { ParameterName = "@matchday", Value = matchday, SqlDbType = SqlDbType.Int });
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                punkte = reader.GetInt32("points");
+            }
+            reader.Close();
+            db.conn.Close();
+
+
+            return punkte;
+        }
+
+        public int GetPointsForTeam(int teamId)
+        {
+            Database db = new();
+            Team team = new();
+            SqlCommand command = new SqlCommand("SELECT * FROM UserMatchdayPoints WHERE (team_id = @team_id)");
+            command.Parameters.Add(new SqlParameter { ParameterName = "@team_id", Value = teamId, SqlDbType = SqlDbType.Int });
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                team.TotalPoints = reader.GetInt32("TotalPoints");
+            }
+            reader.Close();
+            db.conn.Close();
+
+
+            return team.TotalPoints;
         }
 
         public Team GetTeam(int userid, int matchday, bool withPoints = false)

@@ -116,9 +116,9 @@ namespace BCandSC_CSharp
         }
 
 
-        public int GetUserTransaction(int userId, int matchday)
+        public decimal GetUserTransaction(int userId, int matchday)
         {
-            int result = 0;
+            decimal result = 0;
             Database db = new();
 
             SqlCommand command = new SqlCommand("SELECT * FROM [UserTransaction] WHERE ([user_id] = @user_id) AND ([matchday] = @matchday)");
@@ -137,7 +137,7 @@ namespace BCandSC_CSharp
                 using SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read() == true)
                 {
-                    result = reader.GetInt32("amount");
+                    result = reader.GetDecimal("amount");
                 }
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace BCandSC_CSharp
             return result;
         }
 
-        public void SetUserTransaction(int userId, int matchday, int transactionValue)
+        public void SetUserTransaction(int userId, int matchday, decimal transactionValue)
         {
             Database db = new();
             try
@@ -160,7 +160,7 @@ namespace BCandSC_CSharp
                 SqlCommand command = new SqlCommand("INSERT INTO [UserTransaction] ([user_id], [matchday], amount) VALUES (@user_id, @matchday, @amount)");
                 SqlParameter param1 = new SqlParameter { ParameterName = "@user_id", Value = userId, SqlDbType = SqlDbType.Int };
                 SqlParameter param2 = new SqlParameter { ParameterName = "@matchday", Value = matchday, SqlDbType = SqlDbType.Int };
-                SqlParameter param3 = new SqlParameter { ParameterName = "@amount", Value = transactionValue, SqlDbType = SqlDbType.Int };
+                SqlParameter param3 = new SqlParameter { ParameterName = "@amount", Value = transactionValue, SqlDbType = SqlDbType.Decimal };
 
                 command.Parameters.Add(param1);
                 command.Parameters.Add(param2);

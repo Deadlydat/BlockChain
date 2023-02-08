@@ -115,7 +115,7 @@ namespace BCandSC_CSharp
                 double transaction = currentUserBalance.EUR - newBalance.EUR;
 
         
-                user.SetUserTransaction(user.Id, matchDay, (int)transaction);
+                user.SetUserTransaction(user.Id, matchDay, (decimal)transaction);
 
 
             }

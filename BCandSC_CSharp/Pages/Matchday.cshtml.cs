@@ -39,6 +39,7 @@ namespace BCandSC_CSharp.Pages
 
 
             teams = t.GetTeamList(userId);
+            teams.Reverse();
             user = user.GetUser(userId);
 
 
@@ -85,7 +86,7 @@ namespace BCandSC_CSharp.Pages
             User u = new();
             u = u.GetUser(userId);
 
-            team.CreateTeam(userId, $"Team {u.Name} f�r Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
+            team.CreateTeam(userId, $"Team {u.Name} für Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
 
 
             return RedirectToPage("/Formation", new { userId = userId });
