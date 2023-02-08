@@ -43,10 +43,6 @@ namespace BCandSC_CSharp
             DataObject dataObject = new DataObject();
             DataObject data = GetETHValueFromApi().Result;
 
-            //BlockchainInterface blockchainInterface = new();
-
-            //double balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
-
             dataObject.USD = Math.Round(Decimal.ToDouble(balance) * data.USD, 2);
             dataObject.EUR = Math.Round(Decimal.ToDouble(balance) * data.EUR, 2);
 
@@ -56,14 +52,14 @@ namespace BCandSC_CSharp
 
         public static void BetCertainAmount(string teamRepresantion, int betAmount, User user)
         {
-            DataObject dataObject = new DataObject();
+
             DataObject data = GetETHValueFromApi().Result;
 
             double gasFee = 0;
 
 
-            BlockchainInterface blockchainInterface = new();
-            double balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance(user.Address));
+            BlockchainInterface blockchainInterface = new(user);
+            double balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance());
 
 
             double betETH = betAmount / data.EUR;
@@ -71,9 +67,8 @@ namespace BCandSC_CSharp
 
             if (balance > betETH + gasFee)
             {
-                //hier neue bet funktion
-
-                blockchainInterface.Bet(teamRepresantion, user.PrivateKey);
+              
+                blockchainInterface.Bet(teamRepresantion,betAmount);
             }
             else
             {
@@ -85,7 +80,7 @@ namespace BCandSC_CSharp
         public static void CalculateTransactionForParticipants(int matchDay)
         {
             Gamelogic gamelogic = new(matchDay);
-            BlockchainInterface blockchainInterface = new();
+
 
             List<int> participantsId = gamelogic.GetListOfParticipantsForTheMatchday();
 
@@ -93,12 +88,13 @@ namespace BCandSC_CSharp
             {
                 User user = new User();
                 user = user.GetUser(item);
+                BlockchainInterface blockchainInterface = new(user);
 
                 var currentUserBalance = TurnAccountBalanceInFiatMoney(user.GetUserBalance(user.Id));
-                var newBalance = TurnAccountBalanceInFiatMoney(blockchainInterface.GetAccountBalance(user.Address));
+                var newBalance = TurnAccountBalanceInFiatMoney(blockchainInterface.GetAccountBalance());
 
                 double transaction = currentUserBalance.EUR - newBalance.EUR;
-                
+
                 user.SetUserTransaction(user.Id, matchDay, (int)transaction);
             }
         }

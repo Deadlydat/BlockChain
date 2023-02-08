@@ -122,13 +122,33 @@ namespace BCandSC_CSharp
 
 
 
-        public Team GetResultsForMatch()
+        public List<string> GetResultsForMatch()
         {
             List<Team> MatchDayResults = GetTotalPointsForTeam();
 
             List<Team> SortedList = MatchDayResults.OrderByDescending(o => o.TotalPoints).ToList();
 
-            return SortedList.First();
+            int index = 1;
+            foreach (Team team in SortedList)
+            {
+                if (team.TotalPoints == SortedList[index].TotalPoints)
+                {
+                    index++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            SortedList.RemoveRange(index, SortedList.Count - index);
+
+            List<string> Results = new List<string>();
+
+            foreach (Team team in SortedList)
+            {
+                Results.Add(team.Name);
+            }
+            return Results;
         }
 
     }

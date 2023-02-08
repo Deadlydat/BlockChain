@@ -43,11 +43,11 @@ namespace BCandSC_CSharp.Pages
 
             Gamelogic gamelogic = new Gamelogic(Matchday);
 
-            BlockchainInterface blockchainInterface = new();
+            BlockchainInterface blockchainInterface = new(user);
             //To Do casts reduzieren
             if (gamelogic.CheckCurrentMatchday())
             {
-                decimal balance = blockchainInterface.GetAccountBalance(user.Address);
+                decimal balance = blockchainInterface.GetAccountBalance();
 
                 MoneyConversion.DataObject data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
 
@@ -76,7 +76,7 @@ namespace BCandSC_CSharp.Pages
             User u = new();
             u = u.GetUser(userId);
 
-            team.CreateTeam(userId, $"Team {u.Name} f�r Spieltag {Enviroment.GetEnviroment().Matchday}",
+            team.CreateTeam(userId, $"Team {u.Name} fuer Spieltag {Enviroment.GetEnviroment().Matchday}",
                 Enviroment.GetEnviroment().Matchday);
 
 

@@ -69,8 +69,7 @@ namespace BCandSC_CSharp.Pages
                 User user = new User();
                 user = user.GetUser(UserId);
 
-                BlockchainInterface blockchainInterface = new BlockchainInterface();
-                blockchainInterface.Bet(team.Name, user.PrivateKey);
+                MoneyConversion.BetCertainAmount(team.Name, BetAmount, user);
                 team.SetTeamDone(true, team.Id);
 
            

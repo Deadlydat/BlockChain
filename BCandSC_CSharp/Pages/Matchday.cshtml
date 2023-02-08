@@ -348,11 +348,24 @@
                                 <div class="form-group">
                                     <label for="ergebnis">Ergebnis: -10000€</label>
                                 </div>
-                                <!--  
-                                 <div class="form-group">
-                            
+
+                                <div class="form-group">
+
+                                    @{
+
+                                        foreach (Player p in t.Players)
+                                        {
+
+                                            <label for="PlayerName">@p.Name   (@p.Punkte)</label>
+
+                                            <br>
+                                        }
+
+                                    }
+
+
                                 </div>
-                                -->
+
 
                             }
                         }

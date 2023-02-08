@@ -16,6 +16,8 @@ namespace BCandSC_CSharp
     public class BlockchainInterface
     {
         private const string Url = "https://rpc.ankr.com/eth_goerli";
+
+
         private const string ContractAddress = "0x58387EEA716c5E07AEeF2bf92e1731E1e39cA7Fb";
         private const long gas = 20000000000;
 
@@ -30,23 +32,34 @@ namespace BCandSC_CSharp
             _bettingService = new BettingService(_web3, ContractAddress);
         }
 
+
+        public BlockchainInterface()
+        {
+            User user = new User();
+            user = user.GetUser(41);
+            _account = new Account(user.PrivateKey);
+            _web3 = new Web3(_account, Url);
+            _bettingService = new BettingService(_web3, ContractAddress);
+
+        }
+
         public JArray GiveMoneyBack()
         {
             return _bettingService.GiveMoneyBackRequestAndWaitForReceiptAsync(new GiveMoneyBackFunction()
-                { GasPrice = gas }).Result.Logs;
+            { GasPrice = gas }).Result.Logs;
         }
 
         public JArray Bet(string teamRepresentation, int amountToSend)
         {
             return _bettingService.BetRequestAndWaitForReceiptAsync(new BetFunction()
-                    { TeamRepresentation = teamRepresentation, GasPrice = gas, AmountToSend = amountToSend })
+            { TeamRepresentation = teamRepresentation, GasPrice = gas, AmountToSend = amountToSend })
                 .Result.Logs;
         }
 
         public JArray DistributePrices(List<string> teamRepresentationsOfWinners)
         {
             return _bettingService.DistributePrizesRequestAndWaitForReceiptAsync(new DistributePrizesFunction()
-                    { TeamRepresentationOfWinners = teamRepresentationsOfWinners, GasPrice = gas })
+            { TeamRepresentationOfWinners = teamRepresentationsOfWinners, GasPrice = gas })
                 .Result.Logs;
         }
 
