@@ -26,6 +26,7 @@ namespace BCandSC_CSharp.Pages
                 Console.WriteLine("starting game...");
                 BlockchainInterface.StartGame(adminKey);
                 Console.WriteLine("started game betting is closed");
+                Console.WriteLine("");
 
             }
 
@@ -35,6 +36,7 @@ namespace BCandSC_CSharp.Pages
                 Console.WriteLine("game is almost over..");
                 BlockchainInterface.FinishGame(adminKey);
                 Console.WriteLine("finished game");
+                Console.WriteLine("");
 
 
 
@@ -46,7 +48,7 @@ namespace BCandSC_CSharp.Pages
                 Team winnerTeam = gamelogic.GetResultsForMatch();
                 BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
                 Console.WriteLine("winner team: " + winnerTeam.Name + "-> end matchday");
-
+             
 
 
             }
@@ -56,6 +58,11 @@ namespace BCandSC_CSharp.Pages
 
             if (Request.Query["method"] == "money")
             {
+
+                MoneyConversion.CalculateTransactionForParticipants(Enviroment.GetEnviroment().Matchday);
+                Console.WriteLine("new matchday!");
+                Enviroment.SetMatchday();
+                Console.WriteLine("");
                 //MoneyConversion.DataObject data = MoneyConversion.GetETHValueFromApi().Result;
                 //Console.WriteLine(data.USD + " " + data.EUR);
 
@@ -75,9 +82,7 @@ namespace BCandSC_CSharp.Pages
 
 
 
-                MoneyConversion.CalculateTransactionForParticipants(Enviroment.GetEnviroment().Matchday);
-                Console.WriteLine("new matchday!");
-                Enviroment.SetMatchday();
+                Console.WriteLine("");
 
 
             }

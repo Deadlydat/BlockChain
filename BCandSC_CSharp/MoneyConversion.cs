@@ -109,15 +109,13 @@ namespace BCandSC_CSharp
                 User user = new User();
                 user = user.GetUser(item);
 
-                decimal accountBalance = user.GetUserBalance(user.Id);
-                decimal newBalance = blockchainInterface.GetAccountBalance(user.Address);
+                var currentUserBalance = TurnAccountBalanceInFiatMoney(user.GetUserBalance(user.Id));
+                var newBalance = TurnAccountBalanceInFiatMoney(blockchainInterface.GetAccountBalance(user.Address));
 
-                decimal transaction = accountBalance - newBalance;
+                double transaction = currentUserBalance.EUR - newBalance.EUR;
 
-                var data = TurnAccountBalanceInFiatMoney(transaction);
-
-
-                user.SetUserTransaction(user.Id, matchDay, (int)data.EUR);
+        
+                user.SetUserTransaction(user.Id, matchDay, (int)transaction);
 
 
             }
