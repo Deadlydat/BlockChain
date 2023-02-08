@@ -47,7 +47,7 @@ namespace BCandSC_CSharp
             { GasPrice = gas }).Result.Logs;
         }
 
-        public JArray Bet(string teamRepresentation, int amountToSend)
+        public JArray Bet(string teamRepresentation, long amountToSend)
         {
             return _bettingService.BetRequestAndWaitForReceiptAsync(new BetFunction()
             { TeamRepresentation = teamRepresentation, GasPrice = gas, AmountToSend = amountToSend })
