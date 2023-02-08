@@ -16,9 +16,7 @@ namespace BCandSC_CSharp
     public class BlockchainInterface
     {
         private const string Url = "https://rpc.ankr.com/eth_goerli";
-
-
-        private const string ContractAddress = "0xACE6A6F4e80aaA06a6C6069AbFC56C186F8BA55C";
+        private const string ContractAddress = "0x60e2b4d5152E0fF7451A4e8A88e69D39627279f9";
         private const long gas = 20000000000;
 
         private Account _account;

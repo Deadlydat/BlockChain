@@ -60,15 +60,16 @@ namespace BCandSC_CSharp
 
             BlockchainInterface blockchainInterface = new(user);
             double balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance());
+        
 
 
-            double betETH = betAmount / data.EUR;
+            double betETH = (betAmount / data.EUR)* 1000000000000000000;
 
 
             if (balance > betETH + gasFee)
             {
               
-                blockchainInterface.Bet(teamRepresantion,betAmount);
+                blockchainInterface.Bet(teamRepresantion,(int)betETH);
             }
             else
             {
