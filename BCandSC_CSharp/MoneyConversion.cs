@@ -13,22 +13,18 @@ namespace BCandSC_CSharp
 {
     public class MoneyConversion
     {
-
-
         public class DataObject
         {
             public double USD { get; set; } = 0;
             public double EUR { get; set; } = 0;
-
         }
 
         public static async Task<DataObject> GetETHValueFromApi()
         {
-
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR" +
+            HttpResponseMessage response = await client.GetAsync(
+                "https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR" +
                 "&api_key=b88e111c6b5fae28acc9c6f997f2ae98be60fea07467d6094984e9d9421b4fb8");
-
 
 
             if (response.IsSuccessStatusCode)
@@ -36,13 +32,10 @@ namespace BCandSC_CSharp
                 var responseBody = await response.Content.ReadAsStringAsync();
 
                 return JsonConvert.DeserializeObject<DataObject>(responseBody);
-
-
-
             }
+
             return new DataObject();
         }
-
 
 
         public static DataObject TurnAccountBalanceInFiatMoney(decimal balance)
@@ -59,7 +52,6 @@ namespace BCandSC_CSharp
 
             return dataObject;
         }
-
 
 
         public static void BetCertainAmount(string teamRepresantion, int betAmount, User user)
@@ -79,26 +71,19 @@ namespace BCandSC_CSharp
 
             if (balance > betETH + gasFee)
             {
-
                 //hier neue bet funktion
 
                 blockchainInterface.Bet(teamRepresantion, user.PrivateKey);
             }
             else
             {
-
                 //warning for user
             }
-
         }
-
-
-
 
 
         public static void CalculateTransactionForParticipants(int matchDay)
         {
-
             Gamelogic gamelogic = new(matchDay);
             BlockchainInterface blockchainInterface = new();
 
@@ -113,15 +98,9 @@ namespace BCandSC_CSharp
                 var newBalance = TurnAccountBalanceInFiatMoney(blockchainInterface.GetAccountBalance(user.Address));
 
                 double transaction = currentUserBalance.EUR - newBalance.EUR;
-
-        
+                
                 user.SetUserTransaction(user.Id, matchDay, (int)transaction);
-
-
             }
-
         }
-
-
     }
 }

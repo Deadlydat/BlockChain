@@ -8,8 +8,7 @@ namespace BCandSC_CSharp.Pages
 {
     public class MatchdayModel : PageModel
     {
-        [BindProperty(SupportsGet = true)]
-        public int userId { get; set; }
+        [BindProperty(SupportsGet = true)] public int userId { get; set; }
         public int Matchday { get; set; } = 0;
         Team team { get; set; } = new();
         public List<Team> teams { get; set; } = new();
@@ -42,7 +41,6 @@ namespace BCandSC_CSharp.Pages
             user = user.GetUser(userId);
 
 
-
             Gamelogic gamelogic = new Gamelogic(Matchday);
 
             BlockchainInterface blockchainInterface = new();
@@ -58,23 +56,16 @@ namespace BCandSC_CSharp.Pages
                 AccountBalanceUSD = data.USD;
 
                 user.SetUserBalance(userId, balance);
-
-
-
             }
             else
             {
-                decimal balance =user.GetUserBalance(userId);
+                var balance = user.GetUserBalance(userId);
+                var data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
 
-                MoneyConversion.DataObject data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
-
-                AccountBalanceETH = Decimal.ToDouble(balance);
+                AccountBalanceETH = decimal.ToDouble(balance);
                 AccountBalanceEUR = data.EUR;
                 AccountBalanceUSD = data.USD;
-
             }
-
-
 
 
             return Page();
@@ -85,7 +76,8 @@ namespace BCandSC_CSharp.Pages
             User u = new();
             u = u.GetUser(userId);
 
-            team.CreateTeam(userId, $"Team {u.Name} f�r Spieltag {Enviroment.GetEnviroment().Matchday}", Enviroment.GetEnviroment().Matchday);
+            team.CreateTeam(userId, $"Team {u.Name} f�r Spieltag {Enviroment.GetEnviroment().Matchday}",
+                Enviroment.GetEnviroment().Matchday);
 
 
             return RedirectToPage("/Formation", new { userId = userId });

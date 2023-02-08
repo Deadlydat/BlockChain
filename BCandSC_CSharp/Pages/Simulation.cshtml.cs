@@ -5,7 +5,6 @@ namespace BCandSC_CSharp.Pages
 {
     public class SimulationModel : PageModel
     {
-
         public Gamelogic gamelogic = new(Enviroment.GetEnviroment().Matchday);
         public BlockchainInterface BlockchainInterface = new();
         private String adminKey = "0x2a0635d67d97ae1abeaab336f7c409acbc4330cbd30eab78934cab02e147d0af";
@@ -13,21 +12,17 @@ namespace BCandSC_CSharp.Pages
 
         public IActionResult OnGet()
         {
-
             return Page();
         }
 
         public IActionResult OnPost()
         {
-
-
             if (Request.Query["method"] == "startgame")
             {
                 Console.WriteLine("starting game...");
                 BlockchainInterface.StartGame(adminKey);
                 Console.WriteLine("started game betting is closed");
                 Console.WriteLine("");
-
             }
 
 
@@ -37,9 +32,6 @@ namespace BCandSC_CSharp.Pages
                 BlockchainInterface.FinishGame(adminKey);
                 Console.WriteLine("finished game");
                 Console.WriteLine("");
-
-
-
             }
 
             if (Request.Query["method"] == "prices")
@@ -48,17 +40,11 @@ namespace BCandSC_CSharp.Pages
                 Team winnerTeam = gamelogic.GetResultsForMatch();
                 BlockchainInterface.DistributePrices(winnerTeam.Name, adminKey);
                 Console.WriteLine("winner team: " + winnerTeam.Name + "-> end matchday");
-             
-
-
             }
-
-
 
 
             if (Request.Query["method"] == "money")
             {
-
                 MoneyConversion.CalculateTransactionForParticipants(Enviroment.GetEnviroment().Matchday);
                 Console.WriteLine("new matchday!");
                 Enviroment.SetMatchday();
@@ -81,12 +67,8 @@ namespace BCandSC_CSharp.Pages
                 //user.SetUserBalance(45, balance);
 
 
-
                 Console.WriteLine("");
-
-
             }
-
 
 
             return Page();
