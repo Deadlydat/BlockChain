@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic.FileIO;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
+using System.Data;
 using System.IO.Pipelines;
 
 namespace BCandSC_CSharp.Pages
@@ -21,32 +23,69 @@ namespace BCandSC_CSharp.Pages
 
         public IActionResult OnGet()
         {
-            //List<string> strings = new();
-            //int counter = 15;
-
-            //foreach(string line in System.IO.File.ReadAllLines("C:/temp/test.txt"))
+            //foreach(Player p in GetPlayers())
             //{
-            //    Player player = new Player();
-            //    player.Position = (Player.PlayerPosition)Convert.ToInt32(line.Split("\t")[0]);
-            //    player.Points = Convert.ToInt32(line.Split("\t")[1]);
-            //    player.Name = line.Split("\t")[2];
-            //    player.Marktwert = Convert.ToInt32(line.Split("\t")[3]);
-            //    player.Nummer = Convert.ToInt32(line.Split("\t")[4]);
-            //    player.Einsaetze = Convert.ToInt32(line.Split("\t")[5]);
-            //    player.Tore = Convert.ToInt32(line.Split("\t")[6].Replace("-", "0"));
-            //    player.Mannschaft = line.Split("\t")[7];
+            //    //if(p.Punkte > 30)
+            //    //{
+            //    //    p.Punkte = p.Punkte - 30;
+            //    //}
 
-            //    //strings.Add($"INSERT INTO Player ([name],[verein],[position],[marktwert],[einsaetze],[tore]) VALUES ('{player.Name}','{player.Mannschaft}',{(int)player.Position},{player.Marktwert},{player.Einsaetze},{player.Tore});");
-            //    strings.Add($"INSERT INTO PlayerPoints ([player_id],[matchday],[points]) VALUES ({counter},1,{player.Points});");
-            //    counter++;
+            //    CreatePlayer(p.Id, 5, p.Punkte - 21);
             //}
-            //System.IO.File.WriteAllLines("C:/temp/sql.txt", strings);
-            //Player p = new();
-           //return RedirectToPage("/Formation", new { userId = 2 });
 
-             //return RedirectToPage("/Matchday", new { userId = 42 });
+            
+
+            //return RedirectToPage("/Formation", new { userId = 2 });
+
+            //return RedirectToPage("/Matchday", new { userId = 42 });
             //return RedirectToPage("/Simulation");
-              return Page();
+            return Page();
+        }
+
+
+        public void CreatePlayer(int playerId, int matchday, int points)
+        {
+            Database db = new();
+            try
+            {
+                SqlCommand command = new SqlCommand($"INSERT INTO PlayerPoints ([player_id],[matchday],[points]) VALUES ({playerId},{matchday},{points})");
+
+                db.conn.Open();
+                command.Connection = db.conn;
+                command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                db.conn.Close();
+            }
+        }
+
+        public List<Player> GetPlayers()
+        {
+            User u = new();
+            List<Player> list = new List<Player>();
+            Database db = new();
+            SqlCommand command = new SqlCommand("SELECT * FROM PlayerPoints");
+
+            db.conn.Open();
+            command.Connection = db.conn;
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Player p = new();
+                p.Id = reader.GetInt32("player_id");
+                p.Punkte = reader.GetInt32("points");
+                list.Add(p);
+            }
+            reader.Close();
+            db.conn.Close();
+
+            return list;
         }
 
 
