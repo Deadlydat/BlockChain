@@ -9,7 +9,7 @@ namespace BCandSC_CSharp
         public int Id { get; set; } = -1;
         public string Name { get; set; } = "";
         public PlayerPosition Position { get; set; } = PlayerPosition.Unknwon;
-        public int Points { get; set; } = 0;
+        public int Punkte { get; set; } = 0;
         public int Marktwert { get; set; } = 0;
         public int Nummer { get; set; } = 0;
         public int Einsaetze { get; set; } = 0;
@@ -48,6 +48,8 @@ namespace BCandSC_CSharp
                 player.Tore = reader.GetInt32("tore");
                 player.Mannschaft = reader.GetString("verein");
                 player.Position = (Player.PlayerPosition)reader.GetInt32("position");
+                player.Punkte = reader.GetInt32("punkte");
+                
             }
             reader.Close();
             db.conn.Close();
