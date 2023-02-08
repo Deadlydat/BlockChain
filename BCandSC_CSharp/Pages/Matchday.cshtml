@@ -337,6 +337,7 @@
                 @{
                     foreach (Team t in Model.teams)
                     {
+
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title">@t.Name</h5>
@@ -344,7 +345,16 @@
                                     <label>Punkte: @t.TotalPoints</label>
                                 </div>
                                 <div class="form-group" style="font-size:24px;">
-                                    <label>Ergebnis: @t.Transaction EUR</label>
+                                    @{
+                                        if(t.Transaction > 0)
+                                        {
+                                            <label>Ergebnis: @t.Transaction EUR</label>
+                                        }else{
+                                            <label>Ergebnis: Verloren!</label>
+                                        }
+                                    }
+
+                                    
                                 </div>
                                 <div class="form-group" style="font-size: 18px;">
                                     @{
