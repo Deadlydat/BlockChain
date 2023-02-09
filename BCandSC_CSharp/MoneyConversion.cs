@@ -52,40 +52,27 @@ namespace BCandSC_CSharp
 
         public static void BetCertainAmount(string teamRepresantion, int betAmount, User user)
         {
-
             DataObject data = GetETHValueFromApi().Result;
 
             double gasFee = 0;
-
-
             BlockchainInterface blockchainInterface = new(user);
             var balance = Decimal.ToDouble(blockchainInterface.GetAccountBalance());
 
-
-
-
             double betETH = betAmount / data.EUR;
-
 
             if (balance > betETH + gasFee)
             {
-
-
                 double betWei = (betAmount / data.EUR) * 1000000000000000000;
 
                 blockchainInterface.Bet(teamRepresantion, Convert.ToInt64(betWei));
             }
-            else
-            {
-                //warning for user
-            }
+
         }
 
 
         public static void CalculateTransactionForParticipants(int matchDay)
         {
             Gamelogic gamelogic = new(matchDay);
-
 
             List<int> participantsId = gamelogic.GetListOfParticipantsForTheMatchday();
 
@@ -99,7 +86,6 @@ namespace BCandSC_CSharp
                 var newBalance = TurnAccountBalanceInFiatMoney(blockchainInterface.GetAccountBalance());
 
                 double transaction = newBalance.EUR - currentUserBalance.EUR;
-
 
                 user.SetUserTransaction(user.Id, matchDay, (decimal)transaction);
 

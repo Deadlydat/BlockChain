@@ -7,13 +7,13 @@ namespace BCandSC_CSharp.Pages
 {
     public class FormationModel : PageModel
     {
-        [BindProperty (SupportsGet = true)]
+        [BindProperty(SupportsGet = true)]
         public int userId { get; set; }
         Team t = new();
 
         public IActionResult OnGet()
-        {            
-            if(t.GetTeam(userId, Enviroment.GetEnviroment().Matchday).Players.Count == 11)
+        {
+            if (t.GetTeam(userId, Enviroment.GetEnviroment().Matchday).Players.Count == 11)
                 return RedirectToPage("/Result", new { userId = userId });
 
             return Page();

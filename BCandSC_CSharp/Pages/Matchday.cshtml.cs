@@ -24,14 +24,6 @@ namespace BCandSC_CSharp.Pages
             Matchday = Enviroment.GetEnviroment().Matchday;
             Team t = team.GetTeam(userId, Matchday);
 
-            //if (t.Players.Count == 11)
-            //    return RedirectToPage("/Result", new { userId = userId });
-
-            //if (t.Formation != "")
-            //    return RedirectToPage("/PlayerSelection", new { UserId = userId });
-
-            //if (t.Id > 0)
-            //    return RedirectToPage("/Formation", new { userId = userId });
             if (t.Formation != "" && t.Done == false)
                 return RedirectToPage("/PlayerSelection", new { UserId = userId });
 
@@ -47,11 +39,10 @@ namespace BCandSC_CSharp.Pages
             Gamelogic gamelogic = new Gamelogic(Matchday);
 
             BlockchainInterface blockchainInterface = new(user);
-            //To Do casts reduzieren
+
             if (gamelogic.CheckCurrentMatchday() || done == true)
             {
                 decimal balance = blockchainInterface.GetAccountBalance();
-
                 MoneyConversion.DataObject data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
 
                 AccountBalanceETH = Decimal.ToDouble(balance);
@@ -63,13 +54,12 @@ namespace BCandSC_CSharp.Pages
             else
             {
                 var balance = user.GetUserBalance(userId);
-                var data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);       
+                var data = MoneyConversion.TurnAccountBalanceInFiatMoney(balance);
 
                 AccountBalanceETH = decimal.ToDouble(balance);
                 AccountBalanceEUR = data.EUR;
                 AccountBalanceUSD = data.USD;
             }
-
 
             return Page();
         }

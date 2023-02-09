@@ -84,10 +84,6 @@ namespace BCandSC_CSharp
         }
 
 
-
-
-
-
         public bool CheckCurrentMatchday()
         {
             bool done = false;
@@ -118,8 +114,6 @@ namespace BCandSC_CSharp
 
             return done;
         }
-
-
 
 
         public List<string> GetResultsForMatch()
